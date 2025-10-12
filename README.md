@@ -5,7 +5,13 @@ Repositorio personal con apuntes, ejercicios y trabajos prácticos de mi carrera
 Incluye código, notas y materiales organizados por año y materia.
 
 **Progreso Estimado: ~48%**
+
 **Promedio: 9.44**
+
+**Leyenda:**
+- ✅ Aprobada  
+- 🧠 En curso  
+- ⏳ Pendiente  
 
 ## Materias obligatorias
 
@@ -30,7 +36,6 @@ Incluye código, notas y materiales organizados por año y materia.
 | Redes de Comunicaciones y Cómputo Distribuido | ⏳ | — |
 | Seminario sobre Tecnología y Sociedad | ⏳ | — |
 | Tesis | ⏳ | — |
-| … | … | … |
 
 
 ---
@@ -49,4 +54,3 @@ Incluye código, notas y materiales organizados por año y materia.
 | Materia | Estado | Año |
 |---|---|---|
 | Interactive theorem provers: theory and practice | ✅ | 2025 |
-| … | … | … |
