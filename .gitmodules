@@ -25,3 +25,9 @@
 [submodule "25-1C/ALC/alc-tp1"]
 	path = 25-1C/ALC/alc-tp1
 	url = git@git.exactas.uba.ar:bdesutonagy/alc-tp1.git
+[submodule "24-2C/AED/aed-tp2-bils"]
+	path = 24-2C/AED/aed-tp2-bils
+	url = git@git.exactas.uba.ar:bdesutonagy/aed-tp2-bils.git
+[submodule "24-1C/IP/ip-ma-dt-ma-bsn"]
+	path = 24-1C/IP/ip-ma-dt-ma-bsn
+	url = git@git.exactas.uba.ar:mtapia/ip-ma-dt-ma-bsn.git
