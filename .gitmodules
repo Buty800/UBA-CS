@@ -7,3 +7,12 @@
 [submodule "25-2C/AyOC/tp-sp-nacho-y-sus-seg-faults"]
 	path = 25-2C/AyOC/tp-sp-nacho-y-sus-seg-faults
 	url = git@github.com:AyOC-exactas/tp-sp-nacho-y-sus-seg-faults.git
+[submodule "25-2C/ISW/ejercicio-1-c-digo-repetido-este-grupo-es-un-objeto"]
+	path = 25-2C/ISW/ejercicio-1-c-digo-repetido-este-grupo-es-un-objeto
+	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-1-c-digo-repetido-este-grupo-es-un-objeto.git
+[submodule "25-2C/ISW/ejercicio-4-p2-stack-parte-a-este-grupo-es-un-objeto"]
+	path = 25-2C/ISW/ejercicio-4-p2-stack-parte-a-este-grupo-es-un-objeto
+	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-4-p2-stack-parte-a-este-grupo-es-un-objeto.git
+[submodule "25-2C/ISW/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto"]
+	path = 25-2C/ISW/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto
+	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto.git
