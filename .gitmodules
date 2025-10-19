@@ -1,0 +1,9 @@
+[submodule "25-2C/AyOC/tp-simd-Buty800"]
+	path = 25-2C/AyOC/tp-simd-Buty800
+	url = git@github.com:AyOC-exactas/tp-simd-Buty800.git
+[submodule "25-2C/AyOC/tp-git-Buty800"]
+	path = 25-2C/AyOC/tp-git-Buty800
+	url = git@github.com:AyOC-exactas/tp-git-Buty800.git
+[submodule "25-2C/AyOC/tp-sp-nacho-y-sus-seg-faults"]
+	path = 25-2C/AyOC/tp-sp-nacho-y-sus-seg-faults
+	url = git@github.com:AyOC-exactas/tp-sp-nacho-y-sus-seg-faults.git
