@@ -1,0 +1,141 @@
+# =========================
+# Archivos y carpetas comunes
+# =========================
+*.log
+*.tmp
+*.swp
+*.bak
+*.out
+*.o
+*.a
+*.so
+*.class
+*.hi
+*.dyn_hi
+*.dyn_o
+*.exe
+*.dll
+*.jar
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.DS_Store
+Thumbs.db
+
+# =========================
+# Archivos de compilación C
+# =========================
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.exe
+/build/
+/bin/
+/dist/
+/target/
+
+# =========================
+# Archivos de Java
+# =========================
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.idea/
+*.classpath
+*.project
+*.settings/
+out/
+build/
+
+# =========================
+# Archivos de Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.eggs/
+.env/
+.venv/
+venv/
+env/
+*.ipynb_checkpoints/
+.mypy_cache/
+.pytest_cache/
+.pyre/
+.cache/
+
+# =========================
+# Archivos de Haskell
+# =========================
+*.hi
+*.o
+*.dyn_hi
+*.dyn_o
+/dist/
+/dist-newstyle/
+/.stack-work/
+cabal.project.local
+cabal.project.local~
+
+# =========================
+# Archivos de Agda
+# =========================
+*.agdai
+.agda-mode/
+.agda/
+
+
+# =========================
+# Archivos de Smalltalk
+# =========================
+#*.changes
+#*.image
+#*.sources
+#*.playground
+
+# =========================
+# Archivos de Prolog
+# =========================
+*.qlf
+*.xwam
+
+# =========================
+# Editores comunes
+# =========================
+# VSCode
+.vscode/
+# Emacs
+*~
+.#*
+.emacs.desktop
+# Vim
+*.swp
+*.swo
+# JetBrains (IntelliJ, PyCharm, CLion, etc.)
+.idea/
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# =========================
+# Otros posibles temporales
+# =========================
+*.tmp
+*.temp
+*.bak
+*.old
+
+# =========================
+# Archivos de sistema o personales
+# =========================
+*.DS_Store
+Thumbs.db

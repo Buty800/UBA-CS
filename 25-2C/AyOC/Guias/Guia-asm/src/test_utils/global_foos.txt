@@ -1,0 +1,6 @@
+global_foo_label EJERCICIO_1_HECHO
+global_foo_label EJERCICIO_2_HECHO
+global_foo_label EJERCICIO_3_HECHO
+global_foo_label hay_accion_que_toque
+global_foo_label invocar_acciones
+global_foo_label contar_cartas
