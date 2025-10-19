@@ -22,3 +22,6 @@
 [submodule "25-1C/PLP/plp-tp2-no-tipa"]
 	path = 25-1C/PLP/plp-tp2-no-tipa
 	url = git@git.exactas.uba.ar:fmichalski/plp-tp2-no-tipa.git
+[submodule "25-1C/ALC/alc-tp1"]
+	path = 25-1C/ALC/alc-tp1
+	url = git@git.exactas.uba.ar:bdesutonagy/alc-tp1.git
