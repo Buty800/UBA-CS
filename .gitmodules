@@ -31,3 +31,6 @@
 [submodule "24-1C/IP/ip-ma-dt-ma-bsn"]
 	path = 24-1C/IP/ip-ma-dt-ma-bsn
 	url = git@git.exactas.uba.ar:mtapia/ip-ma-dt-ma-bsn.git
+[submodule "25-2C/TDDI/tp-tipos-dependientes-y-demostradores-interactivos"]
+	path = 25-2C/TDDI/tp-tipos-dependientes-y-demostradores-interactivos
+	url = git@git.exactas.uba.ar:bdesutonagy/tp-tipos-dependientes-y-demostradores-interactivos.git
