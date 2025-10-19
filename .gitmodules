@@ -16,3 +16,9 @@
 [submodule "25-2C/ISW/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto"]
 	path = 25-2C/ISW/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto
 	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-4-p2-stack-parte-b-este-grupo-es-un-objeto.git
+[submodule "25-1C/PLP/plp-tp1-no-tipa"]
+	path = 25-1C/PLP/plp-tp1-no-tipa
+	url = git@git.exactas.uba.ar:bdesutonagy/plp-tp1-no-tipa.git
+[submodule "25-1C/PLP/plp-tp2-no-tipa"]
+	path = 25-1C/PLP/plp-tp2-no-tipa
+	url = git@git.exactas.uba.ar:fmichalski/plp-tp2-no-tipa.git

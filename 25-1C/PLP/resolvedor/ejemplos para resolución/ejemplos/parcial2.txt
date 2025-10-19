@@ -1,0 +1,6 @@
+-tipo(M,f(T,U)),-tipo(N,T),tipo(app(M,N),U)
+tipo(t1,f(a,f(b,y)))
+tipo(t2,f(a,b))
+tipo(t3,a)
+-tipo(M,y)
+

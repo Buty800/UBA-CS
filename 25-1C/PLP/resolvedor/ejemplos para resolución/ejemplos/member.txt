@@ -1,0 +1,5 @@
+member(X,[X|XS])
+member(X,[Y|XS]),-member(X,XS)
+esSublista(XS,[])
+esSublista(L,[X|XS]),-member(X,L),-esSublista(L,XS)
+-esSublista([a|[b|[]]],R),-member(b,R)

@@ -1,0 +1,8 @@
+-radio(X1), ruidoso(X1)
+-posee(X2,Y2), -libro(Y2), -posee(X2,Z), -revista(Z)
+-esdormilon(X3), -posee(X3,Y3), -ruidoso(Y3)
+posee(pepe,c)
+libro(c),radio(c)
+esdormilon(pepe)
+posee(pepe,a)
+revista(a)
