@@ -1,0 +1,16 @@
+<book>
+  <requirements>
+     <feature>EruditeXMLBookHTML</feature>
+  </requirements>
+  <chapter>
+    <title>Intro</title>
+
+    <p>Hello world</p>
+    <p>
+      <ul>
+        <li>Hello</li>
+        <li>World</li>
+      </ul>
+    </p>
+  </chapter>
+</book>

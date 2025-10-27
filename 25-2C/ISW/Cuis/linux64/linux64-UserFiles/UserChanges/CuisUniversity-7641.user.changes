@@ -1,0 +1,2448 @@
+
+
+----STARTUP---- (21 October 2025 13:35:42) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+TestCase subclass: #MarsRoverTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #MarsRoverTest category: #MarsRover stamp: 'BSN 10/21/2025 13:50:25'!
+TestCase subclass: #MarsRoverTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ISW-Parcial1-1C25.st----!
+
+----STARTUP---- (21 October 2025 13:53:57) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ISW-Parcial1-1C25-conIfs.st----!
+
+----STARTUP---- (21 October 2025 13:57:20) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+TestCase subclass: #MarsRoverTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #MarsRoverTest category: #MarsRover stamp: 'BSN 10/21/2025 13:58:04'!
+TestCase subclass: #MarsRoverTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ISW-Parcial1-1C25.st----!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:10:24'!
+test01ComandoVacioRoverNoSeMueve! !
+
+!classDefinition: #Rover category: #MarsRover stamp: 'BSN 10/21/2025 14:13:29'!
+Object subclass: #Rover
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:13:10' prior: 50596903!
+test01ComandoVacioRoverNoSeMueve
+	| marsRover | 
+	marsRover := Rover new.
+	marsRover commando: ''.
+	self assert marsRover estaEnPosicion: (0,0).! !
+
+Object subclass: #Rover
+	instanceVariableNames: 'posicion'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!classDefinition: #Rover category: #MarsRover stamp: 'BSN 10/21/2025 14:14:16'!
+Object subclass: #Rover
+	instanceVariableNames: 'posicion'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover'!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:14:34'!
+ERROR!
+!Rover methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:15:16'!
+estaEnPosicion: posicionAcomparar
+	^ posicion = posicionAcomparar.! !
+!Rover methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:15:37'!
+commando: StringDeCommandos! !
+
+!classRemoval: #EscapeDeFlotaTests stamp: 'BSN 10/21/2025 14:16:06'!
+TestCase subclass: #EscapeDeFlotaTests
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ISW-Parcial1-1C25'!
+
+!classRemoval: #EscapeDeFlota stamp: 'BSN 10/21/2025 14:16:06'!
+Object subclass: #EscapeDeFlota
+	instanceVariableNames: 'flota'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ISW-Parcial1-1C25'!
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ISW-Parcial1-1C25-conIfs.st----!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:18:33' prior: 50596914!
+test01ComandoVacioRoverNoSeMueve
+	| marsRover | 
+	marsRover := Rover new.
+	marsRover commando: ''.
+	self assert marsRover estaEnPosicion: (0,0).! !
+!Rover methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:19:13'!
+initialize 
+	posicion := (0 , 0).! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:19:16'!
+ERROR!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:19:35' prior: 50597992!
+test01ComandoVacioRoverNoSeMueve
+	| marsRover | 
+	marsRover := Rover new.
+	marsRover commando: ''.
+	self assert: (marsRover estaEnPosicion: (0,0)).! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:19:38'!
+ERROR!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:20:11' prior: 50598004!
+test01ComandoVacioRoverNoSeMueve
+	| marsRover | 
+	marsRover := Rover new.
+	marsRover commando: ''.
+	self assert: (marsRover estaEnPosicion: 0@0).! !
+!Rover methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:20:18' prior: 50597999!
+initialize 
+	posicion := 0@0.! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:20:22'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:20:22'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:20:46'!
+test02RoverSeMueveParaAdelante
+	! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:21:46' prior: 50598024!
+test02RoverSeMueveParaAdelante
+	| marsRover | 
+	marsRover := Rover new.
+	marsRover commando: 'f'.
+	self assert: (marsRover estaEnPosicion: 1@0).
+	! !
+
+a := 0@0!
+
+a x!
+!Rover methodsFor: 'as yet unclassified' stamp: 'BSN 10/21/2025 14:23:43' prior: 50596937!
+commando: StringDeComandos
+	StringDeComandos = 'f' ifTrue: [posicion := (posicion x + 1)@(posicion y)]! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/21/2025 14:23:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/21/2025 14:23:47'!
+PASSED!
+
+----STARTUP---- (23 October 2025 15:01:48) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto/MarsRover.st----!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:28:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:29:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:29:00'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:29:00'!
+ERROR!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:29:58' prior: 50596302!
+test04RoverRota90GradosAIzquierdaSinMoverseDespues
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'I'.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:29:59'!
+FAILURE!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeEsteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeEsteYAvanzar
+	self rotarHacia: 'S'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeEsteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeEsteYRetroceder
+	self rotarHacia: 'S'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeNorteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeNorteYAvanzar
+	self rotarHacia: 'E'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeNorteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeNorteYRetroceder
+	self rotarHacia: 'E'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeOesteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeOesteYAvanzar
+	self rotarHacia: 'N'.
+	self avanzar !
+
+!methodRemoval: MarsRover #rotarADerechaDesdeOesteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeOesteYRetroceder
+	self rotarHacia: 'N'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeSurYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeSurYAvanzar
+	self rotarHacia: 'O'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeSurYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarADerechaDesdeSurYRetroceder
+	self rotarHacia: 'O'.
+	self retroceder. !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeEsteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeEsteYAvanzar
+	self rotarHacia: 'N'.
+	self avanzar. !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeEsteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeEsteYRetroceder
+	self rotarHacia: 'N'.
+	self retroceder !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeNorteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeNorteYAvanzar
+	self rotarHacia: 'O'.
+	self avanzar.  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeNorteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeNorteYRetroceder
+	self rotarHacia: 'O'.
+	self retroceder .   !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeOesteYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeOesteYAvanzar
+	self rotarHacia: 'S'.
+	self avanzar.   !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeOesteYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeOesteYRetroceder
+	self rotarHacia: 'S'.
+	self retroceder .  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeSurYAvanzar stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeSurYAvanzar
+	self rotarHacia: 'E'.
+	self avanzar.  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeSurYRetroceder stamp: 'BSN 10/23/2025 15:30:09'!
+rotarAIzquierdaDesdeSurYRetroceder
+	self rotarHacia: 'E'.
+	self retroceder.  !
+
+!methodRemoval: MarsRover #estaEnPosicion: stamp: 'BSN 10/23/2025 15:31:09'!
+estaEnPosicion: posicionAcomparar
+	^ posicion = posicionAcomparar.!
+
+!methodRemoval: MarsRover #isAt:heading: stamp: 'BSN 10/23/2025 15:31:09'!
+isAt: posicionAcomparar heading: unaDireccion
+	^ (posicion = posicionAcomparar) and: [apuntandoHacia = unaDireccion]!
+
+!methodRemoval: MarsRover #modificarPosicionSobreXEn: stamp: 'BSN 10/23/2025 15:31:09'!
+modificarPosicionSobreXEn: unaCantidad
+	posicion := (posicion x + unaCantidad)@(posicion y)!
+
+!methodRemoval: MarsRover #modificarPosicionSobreYEn: stamp: 'BSN 10/23/2025 15:31:09'!
+modificarPosicionSobreYEn: unaCantidad
+	posicion := (posicion x)@(posicion y + unaCantidad)!
+
+----STARTUP---- (23 October 2025 15:31:39) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto/MarsRover.st----!
+
+!methodRemoval: MarsRover #estaEnPosicion: stamp: 'BSN 10/23/2025 15:32:30'!
+estaEnPosicion: posicionAcomparar
+	^ posicion = posicionAcomparar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeEsteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeEsteYAvanzar
+	self rotarHacia: 'S'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeEsteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeEsteYRetroceder
+	self rotarHacia: 'S'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeNorteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeNorteYAvanzar
+	self rotarHacia: 'E'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeNorteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeNorteYRetroceder
+	self rotarHacia: 'E'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeOesteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeOesteYAvanzar
+	self rotarHacia: 'N'.
+	self avanzar !
+
+!methodRemoval: MarsRover #rotarADerechaDesdeOesteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeOesteYRetroceder
+	self rotarHacia: 'N'.
+	self retroceder.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeSurYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeSurYAvanzar
+	self rotarHacia: 'O'.
+	self avanzar.!
+
+!methodRemoval: MarsRover #rotarADerechaDesdeSurYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarADerechaDesdeSurYRetroceder
+	self rotarHacia: 'O'.
+	self retroceder. !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeEsteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeEsteYAvanzar
+	self rotarHacia: 'N'.
+	self avanzar. !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeEsteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeEsteYRetroceder
+	self rotarHacia: 'N'.
+	self retroceder !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeNorteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeNorteYAvanzar
+	self rotarHacia: 'O'.
+	self avanzar.  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeNorteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeNorteYRetroceder
+	self rotarHacia: 'O'.
+	self retroceder .   !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeOesteYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeOesteYAvanzar
+	self rotarHacia: 'S'.
+	self avanzar.   !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeOesteYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeOesteYRetroceder
+	self rotarHacia: 'S'.
+	self retroceder .  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeSurYAvanzar stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeSurYAvanzar
+	self rotarHacia: 'E'.
+	self avanzar.  !
+
+!methodRemoval: MarsRover #rotarAIzquierdaDesdeSurYRetroceder stamp: 'BSN 10/23/2025 15:32:33'!
+rotarAIzquierdaDesdeSurYRetroceder
+	self rotarHacia: 'E'.
+	self retroceder.  !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:32:51' prior: 50596302!
+test04RoverRota90GradosAIzquierdaSinMoverseDespues
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'I'.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:33:09'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:33:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:33:09'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:33:09'!
+ERROR!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:33:22' prior: 50596314!
+test05RoverRota90GradosADerechaSinMoverse
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'r'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:33:32' prior: 50596326!
+test06RoverRota90GradosAIzquierdaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'If'.
+	self assert: (marsRover isAt: 1@1 heading: 'N').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:33:45' prior: 50596338!
+test07RoverRota90GradosADerechaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 1@-1 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:33:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:33:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:33:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:33:54'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:33:54'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:33:54'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:33:54'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:33:54'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:33:54'!
+ERROR!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:33:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:34:01'!
+PASSED!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 15:35:12' prior: 50596229!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	
+	
+	
+	! !
+
+!methodRemoval: MarsRover #rotarHacia: stamp: 'BSN 10/23/2025 15:35:20'!
+rotarHacia: unSentido
+	apuntandoHacia := unSentido.!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 15:35:34'!
+girarIzquierda
+	! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 15:36:09' prior: 50596511!
+girarIzquierda
+	apuntandoHacia := 'N'! !
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:36:13'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:36:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:36:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:36:19'!
+PASSED!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 15:37:41' prior: 50596498!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	
+	
+	! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 15:38:08'!
+girarDerecha
+	apuntandoHacia := 'S'! !
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:38:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:38:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:39:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:39:02'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:46:45'!
+PASSED!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 15:49:25' prior: 50596519!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	
+	! !
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:49:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:49:30'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 15:49:59' prior: 50596199!
+avanzar
+	apuntandoHacia = 'N' ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia = 'O' ifTrue:  [self modificarPosicionSobreXEn: -1].
+	apuntandoHacia  = 'S' ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia  = 'E' ifTrue: [self modificarPosicionSobreXEn: 1].
+! !
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:50:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:50:56'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:51:56' prior: 50596477!
+test06RoverRota90GradosAIzquierdaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'If'.
+	self assert: (marsRover isAt: 0@1 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:51:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:51:58'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:51:58'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:51:58'!
+ERROR!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:52:01'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:53:12' prior: 50596488!
+test07RoverRota90GradosADerechaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@-1 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:53:12'!
+FAILURE!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 15:53:36' prior: 50596534!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].		
+		! !
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:53:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:53:52'!
+ERROR!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:53:52'!
+ERROR!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:53:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:53:59'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:54:47' prior: 50596350!
+test08RoverRota90GradosAIzquierdayRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@-1 heading: 'N').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:55:03' prior: 50596596!
+test08RoverRota90GradosAIzquierdayRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ib'.
+	self assert: (marsRover isAt: 0@-1 heading: 'N').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:55:20' prior: 50596355!
+test09RoverRota90GradosADerechaYRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@1 heading: 'S').! !
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 15:55:50' prior: 50596580!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].	
+	StringDeComandos  = 'Ib' ifTrue: [self girarIzquierda. self retroceder].		
+	StringDeComandos  = 'rb' ifTrue: [self girarDerecha. self retroceder].	
+		! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:55:56'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:55:58'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:56:02'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 15:56:20' prior: 50596212!
+retroceder
+	apuntandoHacia = 'N' ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia = 'O' ifTrue:  [self modificarPosicionSobreXEn: 1].
+	apuntandoHacia  = 'S' ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia  = 'E' ifTrue: [self modificarPosicionSobreXEn: -1].
+! !
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:56:31'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:56:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:56:40'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:56:48' prior: 50596618!
+test09RoverRota90GradosADerechaYRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rb'.
+	self assert: (marsRover isAt: 0@1 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:56:49'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:56:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 15:56:54'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 15:57:57'!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:00:42' prior: 50596530!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'N'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'S'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:01:16' prior: 50596515!
+girarIzquierda
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:01:43' prior: 50596629!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].	
+	StringDeComandos  = 'Ib' ifTrue: [self girarIzquierda. self retroceder].		
+	StringDeComandos  = 'rb' ifTrue: [self girarDerecha. self retroceder].	
+	StringDeComandos  = 'Ir' ifTrue: [self girarIzquierda. self girarDerecha ].			! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:01:50'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:01:58'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:02:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:02:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:02:05'!
+FAILURE!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:03:06' prior: 50596706!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].	
+	StringDeComandos  = 'Ib' ifTrue: [self girarIzquierda. self retroceder].		
+	StringDeComandos  = 'rb' ifTrue: [self girarDerecha. self retroceder].	
+	StringDeComandos  = 'Ir' ifTrue: [self girarIzquierda. self girarDerecha].			! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:03:11'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:03:14'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:03:32'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:04:44'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:04:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:04:45'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:05:00' prior: 50596673!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:05:00'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:05:03' prior: 50596751!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:05:08' prior: 50596763!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:05:10'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:05:19' prior: 50596775!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:05:19'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:05:24' prior: 50596787!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:06:55' prior: 50596695!
+girarIzquierda
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:07:35'!
+test11RoverAvanzaDosVeces
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:07:39' prior: 50596821!
+test11RoverAvanzaDosVeces
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'ff'.
+	self assert: (marsRover isAt: 2@0 heading: 'E').! !
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:08:08' prior: 50596728!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].	
+	StringDeComandos  = 'Ib' ifTrue: [self girarIzquierda. self retroceder].		
+	StringDeComandos  = 'rb' ifTrue: [self girarDerecha. self retroceder].	
+	StringDeComandos  = 'Ir' ifTrue: [self girarIzquierda. self girarDerecha].		
+	StringDeComandos  = 'ff' ifTrue: [self avanzar. self avanzar].		! !
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:08:13'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:08:15'!
+FAILURE!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:08:41' prior: 50596842!
+process: StringDeComandos
+	
+	StringDeComandos = 'f' ifTrue: [self avanzar].
+	StringDeComandos = 'b' ifTrue: [self retroceder].
+	StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+	StringDeComandos  = 'r' ifTrue: [self girarDerecha].	
+	StringDeComandos  = 'If' ifTrue: [self girarIzquierda. self avanzar].		
+	StringDeComandos  = 'rf' ifTrue: [self girarDerecha. self avanzar].	
+	StringDeComandos  = 'Ib' ifTrue: [self girarIzquierda. self retroceder].		
+	StringDeComandos  = 'rb' ifTrue: [self girarDerecha. self retroceder].	
+	StringDeComandos  = 'Ir' ifTrue: [self girarIzquierda. self girarIzquierda. self girarIzquierda. self girarIzquierda].		
+	StringDeComandos  = 'ff' ifTrue: [self avanzar. self avanzar].		! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:08:45'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:08:52' prior: 50596799!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:08:54'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:09:00' prior: 50596892!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:09:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:09:04'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:15:20' prior: 50596810!
+girarIzquierda
+	|nuevaDireccion| 
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:16:15' prior: 50596915!
+girarIzquierda
+	|nuevaDireccion| 
+	apuntandoHacia = 'N' ifTrue: [nuevaDireccion := 'O'].
+	apuntandoHacia = 'O' ifTrue: [nuevaDireccion := 'S'].
+	apuntandoHacia = 'S' ifTrue: [nuevaDireccion := 'E'].
+	apuntandoHacia = 'E' ifTrue: [nuevaDireccion := 'N'].
+	apuntandoHacia := nuevaDireccion ! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:16:22'!
+FAILURE!
+
+[1,2,3] do: [:i | i+1]!
+
+#(1,2,3) do: [:i | i+1]!
+
+{1,2,3} do: [:i | i+1]!
+
+{1 . 2 . 3} do: [:i | i+1]!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:19:10' prior: 50596866!
+process: StringDeComandos
+	StringDeComandos do: [:comando |
+			StringDeComandos = 'f' ifTrue: [self avanzar].
+			StringDeComandos = 'b' ifTrue: [self retroceder].
+			StringDeComandos  = 'I' ifTrue: [self girarIzquierda].
+			StringDeComandos  = 'r' ifTrue: [self girarDerecha].
+		]	! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:19:12'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:19:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:19:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:19:17'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:19:17'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:19:23'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:19:26'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:20:17' prior: 50596926!
+girarIzquierda
+	 
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:20:23' prior: 50596953!
+girarIzquierda
+
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:20:24' prior: 50596964!
+girarIzquierda
+	apuntandoHacia = 'N' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'S'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'E'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'N'].! !
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:20:49' prior: 50596941!
+process: StringDeComandos
+	StringDeComandos do: [:comando |
+			comando = 'f' ifTrue: [self avanzar].
+			comando = 'b' ifTrue: [self retroceder].
+			comando  = 'I' ifTrue: [self girarIzquierda].
+			comando  = 'r' ifTrue: [self girarDerecha].
+		]	! !
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:20:53'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:20:57'!
+FAILURE!
+!MarsRover methodsFor: 'control' stamp: 'BSN 10/23/2025 16:21:42' prior: 50596986!
+process: StringDeComandos
+	StringDeComandos do: [:comando |
+			comando = $f ifTrue: [self avanzar].
+			comando = $b ifTrue: [self retroceder].
+			comando  = $I ifTrue: [self girarIzquierda].
+			comando  = $r ifTrue: [self girarDerecha].
+		]	! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:21:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:21:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:21:48'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:21:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:21:57'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:22:03' prior: 50596904!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:22:04'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:22:10'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:22:27' prior: 50597008!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:22:28'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:22:34' prior: 50597020!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:38:21'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:38:25'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:44:50' prior: 50596684!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [apuntandoHacia := #E].
+	apuntandoHacia = #O ifTrue: [apuntandoHacia := #N].
+	apuntandoHacia = #S ifTrue: [apuntandoHacia := #O].
+	apuntandoHacia = #E ifTrue: [apuntandoHacia := #S].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:45:30' prior: 50596975!
+girarIzquierda
+	apuntandoHacia = #N ifTrue: [apuntandoHacia := #O].
+	apuntandoHacia = #O ifTrue: [apuntandoHacia := #S].
+	apuntandoHacia = #S ifTrue: [apuntandoHacia := #E].
+	apuntandoHacia = #E ifTrue: [apuntandoHacia := #N].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:45:44' prior: 50596649!
+retroceder
+	apuntandoHacia = #N ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia = #O ifTrue:  [self modificarPosicionSobreXEn: 1].
+	apuntandoHacia  = #S ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia  = #E ifTrue: [self modificarPosicionSobreXEn: -1].
+! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:45:53' prior: 50596547!
+avanzar
+	apuntandoHacia = #N ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia = #O ifTrue:  [self modificarPosicionSobreXEn: -1].
+	apuntandoHacia  = #S ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia  = #E ifTrue: [self modificarPosicionSobreXEn: 1].
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:46:09' prior: 50597032!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #E.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: #E).! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:46:10'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:46:13'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:46:22'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:46:31' prior: 50597088!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: $E.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: $E).! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:46:59' prior: 50597053!
+girarIzquierda
+	apuntandoHacia = $N ifTrue: [apuntandoHacia := $O].
+	apuntandoHacia = $O ifTrue: [apuntandoHacia := $S].
+	apuntandoHacia = $S ifTrue: [apuntandoHacia := $E].
+	apuntandoHacia = $E ifTrue: [apuntandoHacia := $N].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:47:09' prior: 50597043!
+girarDerecha
+	apuntandoHacia = $N ifTrue: [apuntandoHacia := $E].
+	apuntandoHacia = $O ifTrue: [apuntandoHacia := $N].
+	apuntandoHacia = $S ifTrue: [apuntandoHacia := $O].
+	apuntandoHacia = $E ifTrue: [apuntandoHacia := $S].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:47:25' prior: 50597064!
+retroceder
+	apuntandoHacia = $N ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia = $O ifTrue:  [self modificarPosicionSobreXEn: 1].
+	apuntandoHacia  = $S ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia  = $E ifTrue: [self modificarPosicionSobreXEn: -1].
+! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:47:34' prior: 50597076!
+avanzar
+	apuntandoHacia = $N ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia = $O ifTrue:  [self modificarPosicionSobreXEn: -1].
+	apuntandoHacia  = $S ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia  = $E ifTrue: [self modificarPosicionSobreXEn: 1].
+! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:47:58'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:48:11'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:48:30' prior: 50596570!
+test07RoverRota90GradosADerechaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: $E.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@-1 heading: $S).! !
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:48:32'!
+PASSED!
+!MarsRover methodsFor: 'posicion' stamp: 'BSN 10/23/2025 16:49:22'!
+modificarDireccion: unaDireccion
+	apuntandoHacia := unaDireccion .! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:51:14' prior: 50597122!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [ 'E'].
+	apuntandoHacia = 'O' ifTrue: [apuntandoHacia := 'N'].
+	apuntandoHacia = 'S' ifTrue: [apuntandoHacia := 'O'].
+	apuntandoHacia = 'E' ifTrue: [apuntandoHacia := 'S'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:51:58' prior: 50597172!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [ self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:51:59' prior: 50597182!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:52:38' prior: 50597111!
+girarIzquierda
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion:  'O'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion:  'S'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion:  'E'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion:  'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:52:46' prior: 50597132!
+retroceder
+	apuntandoHacia = 'N' ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia = 'O' ifTrue:  [self modificarPosicionSobreXEn: 1].
+	apuntandoHacia  = 'S' ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia  = 'E' ifTrue: [self modificarPosicionSobreXEn: -1].
+! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:53:00' prior: 50597144!
+avanzar
+	apuntandoHacia = 'N' ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia = 'O' ifTrue:  [self modificarPosicionSobreXEn: -1].
+	apuntandoHacia  = 'S' ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia  = 'E' ifTrue: [self modificarPosicionSobreXEn: 1].
+! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:53:06'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:53:13' prior: 50597100!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:53:15'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:53:18'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:53:21'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:53:21'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:53:21'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 16:53:26'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:53:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 16:53:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:53:31'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:53:49' prior: 50597156!
+test07RoverRota90GradosADerechaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@-1 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 16:53:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:53:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 16:54:01'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:54:02'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:54:19'!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'ff'.
+	self assert: (marsRover isAt: 2@0 heading: 'E').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:54:28' prior: 50597264!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrfff'.
+	self assert: (marsRover isAt: 3@-3 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:54:30'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:54:32'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:54:44' prior: 50597274!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fff'.
+	self assert: (marsRover isAt: 3@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:54:46'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:54:51' prior: 50597285!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffr'.
+	self assert: (marsRover isAt: 3@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:54:53'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:54:59' prior: 50597295!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrfff'.
+	self assert: (marsRover isAt: 3@-3 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:55:00'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:55:04' prior: 50597305!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrfffI'.
+	self assert: (marsRover isAt: 3@-3 heading: 'S').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:55:08' prior: 50597316!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrfffI'.
+	self assert: (marsRover isAt: 3@-3 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:55:10'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:55:25' prior: 50597327!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrIf'.
+	self assert: (marsRover isAt: 4@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:55:26'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:55:29'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:55:53' prior: 50597338!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrbbb'.
+	self assert: (marsRover isAt: 3@3 heading: 's').! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:55:56' prior: 50597348!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrbbb'.
+	self assert: (marsRover isAt: 3@3 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 16:55:57'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:56:39' prior: 50597206!
+girarIzquierda
+	(apuntandoHacia = 'N') ifTrue: [self modificarDireccion:  'O'].
+	(apuntandoHacia = 'O') ifTrue: [self modificarDireccion:  'S'].
+	(apuntandoHacia = 'S') ifTrue: [self modificarDireccion:  'E'].
+	(apuntandoHacia = 'E') ifTrue: [self modificarDireccion:  'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:56:51' prior: 50597194!
+girarDerecha
+	(apuntandoHacia = 'N') ifTrue: [self modificarDireccion: 'E'].
+	(apuntandoHacia = 'O') ifTrue: [self modificarDireccion: 'N'].
+	(apuntandoHacia = 'S') ifTrue: [self modificarDireccion: 'O'].
+	(apuntandoHacia = 'E') ifTrue: [self modificarDireccion: 'S'].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:56:58'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:57:03' prior: 50597242!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:57:05'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 16:57:07' prior: 50597392!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+!MarsRover methodsFor: 'posicion' stamp: 'BSN 10/23/2025 16:57:26' prior: 50597166!
+modificarDireccion: unaDireccion
+	apuntandoHacia := unaDireccion! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 16:57:29'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 16:59:28' prior: 50597368!
+girarIzquierda
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion:  'O'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion:  'S'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion:  'E'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion:  'N'].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:01:06' prior: 50597380!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:01:11'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 17:01:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 17:01:15'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 17:01:17'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:04:10' prior: 50597404!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarIzquierda.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:04:12'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:04:16' prior: 50597444!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarIzquierda.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:04:17'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:04:31' prior: 50597456!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:04:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:04:36'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:04:57' prior: 50597468!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:04:58'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:05:18' prior: 50597480!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:05:19'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:05:27' prior: 50597494!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:05:29'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:05:40' prior: 50597507!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:05:42'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:05:53' prior: 50597519!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:05:55'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:06:07' prior: 50597531!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:06:08'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:06:17' prior: 50597544!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:06:19'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:07:02' prior: 50597558!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:07:03'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:07:13' prior: 50597571!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:07:14'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:07:58' prior: 50597583!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:07:59'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:08:03' prior: 50597595!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:08:04'!
+PASSED!
+
+'N' = 'N'!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:11:17' prior: 50597432!
+girarDerecha
+	apuntandoHacia := 'E'
+"
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']."! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:11:22'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:11:27' prior: 50597607!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:11:28'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:11:51' prior: 50597619!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue:  [apuntandoHacia := 'E']
+"
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']."! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:11:56'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:12:21' prior: 50597643!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	"
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']."! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:12:28'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:12:44' prior: 50597656!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:12:49'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:13:03' prior: 50597668!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	"
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']."! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:13:06'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:13:23' prior: 50597680!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	"
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']."! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:13:26'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:13:36' prior: 50597692!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:13:45'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:14:07' prior: 50597632!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #N.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: #E).! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:14:42' prior: 50597704!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [self modificarDireccion: #E].
+	apuntandoHacia = #O ifTrue: [self modificarDireccion: #N].
+	apuntandoHacia = #S ifTrue: [self modificarDireccion: #O].
+	apuntandoHacia = #E ifTrue: [self modificarDireccion: #S].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:14:46'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:14:58' prior: 50597727!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [self modificarDireccion: #E].
+	apuntandoHacia = #O ifTrue: [self modificarDireccion: #N].
+	apuntandoHacia = #S ifTrue: [self modificarDireccion: #O].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:15:07'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:15:39' prior: 50597738!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [self modificarDireccion: #E].
+	apuntandoHacia = #O ifTrue: [self modificarDireccion: #N].
+	apuntandoHacia = #S ifTrue: [self modificarDireccion: #O].
+	"apuntandoHacia = #E ifTrue: [self modificarDireccion: #S]."! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:15:58' prior: 50597716!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #O.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: #N).! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:16:00'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:16:08' prior: 50597759!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #S.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: #O).! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:16:10'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:16:29' prior: 50597770!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #N.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: #E).! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:16:31'!
+PASSED!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:16:39' prior: 50597747!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [self modificarDireccion: #E].
+	apuntandoHacia = #O ifTrue: [self modificarDireccion: #N].
+	apuntandoHacia = #S ifTrue: [self modificarDireccion: #O].
+	apuntandoHacia = #E ifTrue: [self modificarDireccion: #S].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:16:42'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:16:59' prior: 50597792!
+girarDerecha
+	apuntandoHacia = #N ifTrue: [self modificarDireccion: #E].
+	apuntandoHacia = #O ifTrue: [self modificarDireccion: #N].
+	"apuntandoHacia = #S ifTrue: [self modificarDireccion: #O]."
+	apuntandoHacia = #E ifTrue: [self modificarDireccion: #S].! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:03'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:07'!
+FAILURE!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/23/2025 17:17:30' prior: 50597803!
+girarDerecha
+	apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E'].
+	apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'].
+	apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'].
+	apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S'].! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/23/2025 17:17:38' prior: 50597781!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover girarDerecha.
+	self assert: (marsRover isAt: 0@0 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:40'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:43'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:46'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 17:17:48'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 17:17:49'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/23/2025 17:17:51'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVeces stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'BSN 10/23/2025 17:17:51'!
+PASSED!
+
+----STARTUP---- (23 October 2025 17:19:32) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto/MarsRover.st----!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'bsn 10/23/2025 17:20:11'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'bsn 10/23/2025 17:20:14'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'bsn 10/23/2025 17:20:16'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:32:00' prior: 50596322!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffibbrrrff'.
+	self assert: (marsRover isAt: 2@2 heading: 'S').! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'bsn 10/23/2025 17:32:19' prior: 50596131!
+girarDerecha
+    apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'E']
+    ifFalse: [
+        apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'N'] ifFalse: [
+            apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'O'] ifFalse: [
+            apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'S']]]].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'bsn 10/23/2025 17:32:27' prior: 50596142!
+girarIzquierda
+    apuntandoHacia = 'N' ifTrue: [self modificarDireccion: 'O']
+    ifFalse: [
+        apuntandoHacia = 'O' ifTrue: [self modificarDireccion: 'S'] ifFalse: [
+            apuntandoHacia = 'S' ifTrue: [self modificarDireccion: 'E'] ifFalse: [
+            apuntandoHacia = 'E' ifTrue: [self modificarDireccion: 'N']]]].! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:32:33'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:32:36'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'bsn 10/23/2025 17:32:39'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:32:57' prior: 50596301!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'N'.
+	marsRover process: 'Ir'.
+	self assert: (marsRover isAt: 0@0 heading: 'N').! !
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'bsn 10/23/2025 17:33:00'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:33:10' prior: 50596453!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffibbrrrff'.
+	self assert: (marsRover isAt: 2@2 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:33:11'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:33:14'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:33:28' prior: 50596504!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfff'.
+	self assert: (marsRover isAt: 0@0 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:33:31'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:34:01' prior: 50596515!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffibb'.
+	self assert: (marsRover isAt: 0@2 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:03'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:34:15' prior: 50596526!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffibb'.
+	self assert: (marsRover isAt: 0@2 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:16'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:19'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:34:24' prior: 50596537!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffi'.
+	self assert: (marsRover isAt: 0@0 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:25'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:29'!
+FAILURE!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:34:51' prior: 50596548!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfff'.
+	self assert: (marsRover isAt: 0@0 heading: 'O').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:34:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:35:12'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:35:24' prior: 50596559!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffIbb'.
+	self assert: (marsRover isAt: 0@2 heading: 'S').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:35:25'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'bsn 10/23/2025 17:36:39' prior: 50596570!
+test12ComandoLargo
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: 'E'.
+	marsRover process: 'fffrrfffIbbrrrff'.
+	self assert: (marsRover isAt: 2@2 heading: 'E').! !
+
+!testRun: #MarsRoverTest #test12ComandoLargo stamp: 'bsn 10/23/2025 17:36:41'!
+PASSED!
+
+----STARTUP---- (24 October 2025 12:29:44) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto/MarsRover.st----!
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/24/2025 12:32:41' prior: 50596155!
+retroceder
+	apuntandoHacia = #North ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia = #West ifTrue:  [self modificarPosicionSobreXEn: 1].
+	apuntandoHacia  = #South ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia  = #East ifTrue: [self modificarPosicionSobreXEn: -1].
+! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/24/2025 12:33:14' prior: 50596143!
+girarIzquierda	
+	apuntandoHacia = #North ifTrue: [self modificarDireccion: 'O']
+	ifFalse: [
+		apuntandoHacia = #West ifTrue: [self modificarDireccion: 'S'] ifFalse: [
+			apuntandoHacia = #South ifTrue: [self modificarDireccion: 'E'] ifFalse: [
+			apuntandoHacia = #East ifTrue: [self modificarDireccion: 'N']]]].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/24/2025 12:33:51' prior: 50596351!
+girarIzquierda	
+	apuntandoHacia = #North ifTrue: [self modificarDireccion: #West]
+	ifFalse: [
+		apuntandoHacia = #West ifTrue: [self modificarDireccion: #South] ifFalse: [
+			apuntandoHacia = #South ifTrue: [self modificarDireccion: #East] ifFalse: [
+			apuntandoHacia = #East ifTrue: [self modificarDireccion: #North]]]].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/24/2025 12:34:47' prior: 50596131!
+girarDerecha
+	apuntandoHacia = #North ifTrue: [self modificarDireccion: #East]
+	ifFalse: [
+		apuntandoHacia = #West ifTrue: [self modificarDireccion: #North] ifFalse: [
+			apuntandoHacia = #South ifTrue: [self modificarDireccion: #West] ifFalse: [
+			apuntandoHacia = #East ifTrue: [self modificarDireccion: #South]]]].! !
+!MarsRover methodsFor: 'movimientos base' stamp: 'BSN 10/24/2025 12:35:12' prior: 50596119!
+avanzar
+	apuntandoHacia = #North ifTrue: [self modificarPosicionSobreYEn: 1].
+	apuntandoHacia = #West ifTrue:  [self modificarPosicionSobreXEn: -1].
+	apuntandoHacia  = #South ifTrue: [self modificarPosicionSobreYEn: -1].
+	apuntandoHacia  = #East ifTrue: [self modificarPosicionSobreXEn: 1].
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:35:24' prior: 50596208!
+test01ComandoVacioRoverNoSeMueve
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: ''.
+	self assert: (marsRover isAt: 0@0 heading: #East).! !
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/24/2025 12:35:26'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:35:36' prior: 50596218!
+test02RoverSeMueveParaAdelante
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'f'.
+	self assert: (marsRover isAt: 1@0 heading: #East).
+	! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:35:45' prior: 50596228!
+test03RoverSeMueveParaAtras
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'b'.
+	self assert: (marsRover isAt: -1@0 heading: #East).
+! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:35:56' prior: 50596238!
+test04RoverRota90GradosAIzquierdaSinMoverseDespues
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'l'.
+	self assert: (marsRover isAt: 0@0 heading: #North).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:36:08' prior: 50596249!
+test05RoverRota90GradosADerechaSinMoverse
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'r'.
+	self assert: (marsRover isAt: 0@0 heading: #South).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:36:18' prior: 50596259!
+test06RoverRota90GradosAIzquierdaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'lf'.
+	self assert: (marsRover isAt: 0@1 heading: #North).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:36:28' prior: 50596270!
+test07RoverRota90GradosADerechaYAvanza
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'rf'.
+	self assert: (marsRover isAt: 0@-1 heading: #South).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:36:37' prior: 50596280!
+test08RoverRota90GradosAIzquierdayRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'lb'.
+	self assert: (marsRover isAt: 0@-1 heading: #Noth).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:36:49' prior: 50596291!
+test09RoverRota90GradosADerechaYRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'rb'.
+	self assert: (marsRover isAt: 0@1 heading: #South).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:37:01' prior: 50596302!
+test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #North.
+	marsRover process: 'rl'.
+	self assert: (marsRover isAt: 0@0 heading: #North).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:37:14' prior: 50596313!
+test11RoverAvanzaDosVecesCorrectamente
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'ff'.
+	self assert: (marsRover isAt: 2@0 heading: #East).! !
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:37:25' prior: 50596323!
+test12RoverProcesaComandoLargoCorrectamente
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'fffrrffflbbrrrff'.
+       self assert: (marsRover isAt: 2@2 heading: #East).! !
+
+!testRun: #MarsRoverTest #test12RoverProcesaComandoLargoCorrectamente stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/24/2025 12:37:28'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVecesCorrectamente stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12RoverProcesaComandoLargoCorrectamente stamp: 'BSN 10/24/2025 12:37:28'!
+PASSED!
+!MarsRoverTest methodsFor: 'as yet unclassified' stamp: 'BSN 10/24/2025 12:37:44' prior: 50596481!
+test08RoverRota90GradosAIzquierdayRetrocede
+	| marsRover startingPosition | 
+	startingPosition := 0@0.
+	marsRover := MarsRover at: startingPosition heading: #East.
+	marsRover process: 'lb'.
+	self assert: (marsRover isAt: 0@-1 heading: #North).! !
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/24/2025 12:37:45'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ComandoVacioRoverNoSeMueve stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02RoverSeMueveParaAdelante stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03RoverSeMueveParaAtras stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04RoverRota90GradosAIzquierdaSinMoverseDespues stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05RoverRota90GradosADerechaSinMoverse stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06RoverRota90GradosAIzquierdaYAvanza stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07RoverRota90GradosADerechaYAvanza stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08RoverRota90GradosAIzquierdayRetrocede stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09RoverRota90GradosADerechaYRetrocede stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10RoverRota90GradosADerechaYAIzquierdaMantienePosicion stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11RoverAvanzaDosVecesCorrectamente stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12RoverProcesaComandoLargoCorrectamente stamp: 'BSN 10/24/2025 12:37:47'!
+PASSED!

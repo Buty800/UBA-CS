@@ -1,0 +1,8 @@
+clickToFocusClickToSelect=#never
+initialFileListDirectories=#roots
+autoReplaceNamedCharacters=true
+focusFollowsMouse=true
+saveReleaseOptionsInWorldMenu=false
+defaultFontSize=12
+defaultLineSpacingFactor=1.15
+userFileOutsDirectory='/home/buty/Documents/UBA-CS/25-2C/ISW'

@@ -34,3 +34,6 @@
 [submodule "25-2C/TDDI/tp-tipos-dependientes-y-demostradores-interactivos"]
 	path = 25-2C/TDDI/tp-tipos-dependientes-y-demostradores-interactivos
 	url = git@git.exactas.uba.ar:bdesutonagy/tp-tipos-dependientes-y-demostradores-interactivos.git
+[submodule "25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto"]
+	path = 25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto
+	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto.git
