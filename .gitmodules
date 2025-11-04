@@ -37,3 +37,6 @@
 [submodule "25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto"]
 	path = 25-2C/ISW/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto
 	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-1-p3-mars-rover-este-grupo-es-un-objeto.git
+[submodule "25-2C/ISW/ejercicio-2-p3-portfolio-1-este-grupo-es-un-objeto"]
+	path = 25-2C/ISW/ejercicio-2-p3-portfolio-1-este-grupo-es-un-objeto
+	url = git@github.com:UBA-FCEN-IngSoft1/ejercicio-2-p3-portfolio-1-este-grupo-es-un-objeto.git

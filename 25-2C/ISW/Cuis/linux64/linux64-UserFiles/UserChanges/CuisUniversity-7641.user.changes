@@ -2446,3 +2446,1202 @@ PASSED!
 
 !testRun: #MarsRoverTest #test12RoverProcesaComandoLargoCorrectamente stamp: 'BSN 10/24/2025 12:37:47'!
 PASSED!
+
+----STARTUP---- (31 October 2025 14:13:01) as /home/buty/Documents/UBA-CS/25-2C/ISW/Cuis/linux64/linux64/CuisUniversity-7641.image!
+
+
+----End fileIn of /home/buty/Documents/UBA-CS/25-2C/ISW/ejercicio-2-p3-portfolio-1-este-grupo-es-un-objeto/Portfolio.st----!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'BSN 10/31/2025 14:19:11'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:14'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:48'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:50'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:19:52'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:19:54'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:19:59'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'BSN 10/31/2025 14:39:12' prior: 50596413!
+accountsSize
+	^ 1.! !
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 14:41:13' prior: 50596320!
+accountsSize
+	| size |
+	size := 0.
+	assets do: [:asset | size := size + asset accountsSize ].! !
+
+{1. 2. 3.}!
+
+#(1 2 3 4 5) anySatisfy: [:x | x > 3].!
+
+true not!
+
+#(1 2 3 4 5) anySatisfy: [:x | x > 3] not!
+
+(#(1 2 3 4 5) anySatisfy: [:x | x > 3]) not!
+
+true not not !
+
+#() allSatisfy: []!
+!Portfolio methodsFor: 'asserts' stamp: 'BSN 10/31/2025 14:48:07' prior: 50596284!
+accountsIsEmpty
+	^ assets allSatisfy: [:asset | asset accountsIsEmpty].! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'BSN 10/31/2025 14:48:17'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:48:19'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:48:23'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:53:42'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:53:47'!
+FAILURE!
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 14:59:02' prior: 50596332!
+enumerateTransactions
+
+	^ assets do: [:anAccount | transactions addAll: (anAccount transactions)]! !
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 14:59:05'!
+PASSED!
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 15:02:33' prior: 50596909!
+enumerateTransactions
+	assets do: [:anAccount | transactions addAll: (anAccount transactions)]! !
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:02:39'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:02:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:02:47'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:02:48'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:06'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:13'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:21'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:42'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:46'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:03:48'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:04:08'!
+PASSED!
+
+   portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+	cuenta1 transactions!
+
+	cuenta2 transactions!
+
+	portfolio transactions!
+!FinancialAssetsTests methodsFor: 'tests' stamp: 'BSN 10/31/2025 15:06:06' prior: 50596725!
+test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente
+	| portfolio subPortfolio1 subPortfolio2 cuenta1 cuenta2 transaccion1 transaccion2 |
+	portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.
+	
+	self assert: (portfolio transactions = ((cuenta2 transactions) addAll: cuenta1 transactions) )! !
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:06:08'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'BSN 10/31/2025 15:07:20' prior: 50596390!
+transactions 
+
+	^ transactions.! !
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:07:25'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:07:29'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:07:35'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:08:33'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:08:34'!
+FAILURE!
+
+#(1 2 3) = #(1 2 3)!
+
+a = a copy !
+
+a = (a copy)!
+
+cuenta1 := ReceptiveAccount new!
+
+Deposit register: 50 on: cuenta1.!
+
+a := Deposit register: 50 on: cuenta1.!
+
+a = a!
+
+a = (a copy)!
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+	cuenta1 transactions !
+
+	cuenta1 transactions on: 1!
+
+	cuenta1 transactions at: 0!
+
+	(cuenta1 transactions) at: 0!
+
+	(cuenta1 transactions) at: 1!
+
+	(cuenta1 transactions) at: 1 value!
+
+	((cuenta1 transactions) at: 1) value!
+
+	((portfolio transactions) at: 1) value!
+
+	((portfolio transactions) at: 2) value!
+
+	((cuenta1 transactions) at: 1) operationValue !
+
+	((portfolio transactions) at: 1) operationValue !
+
+	((portfolio transactions) at: 2) operationValue !
+
+	((cuenta2 transactions) at: 1) operationValue.!
+
+	transaccion2 := Withdraw register: 50 on: cuenta2.!
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Withdraw register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+	((cuenta2 transactions) at: 1) operationValue.!
+
+	((portfolio transactions) at: 2) operationValue !
+
+	((portfolio transactions) at: 1) operationValue !
+
+	(portfolio transactions) = ((cuenta2 transactions) addAll: cuenta1 transactions)!
+
+	(portfolio transactions) = ((cuenta1 transactions) addAll: cuenta2 transactions)!
+
+	(portfolio transactions) at: 1!
+
+	(portfolio transactions at: 1) = (cuenta1  transactions at: 1)!
+
+	(portfolio transactions at: 2) = (cuenta1  transactions at: 2)!
+
+	(portfolio transactions at: 1) = (cuenta1  transactions at: 1) true .!
+
+	(portfolio transactions at: 1) = (cuenta1  transactions at: 1).!
+
+	portfolio transactions!
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Withdraw register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+!FinancialAssetsTests methodsFor: 'tests' stamp: 'BSN 10/31/2025 15:19:30' prior: 50596936!
+test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente
+	| portfolio subPortfolio1 subPortfolio2 cuenta1 cuenta2 transaccion1 transaccion2 |
+	portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.
+	
+	self assert: (portfolio transactions = ((cuenta1 transactions) addAll: cuenta2 transactions) )! !
+
+!methodRemoval: Portfolio #enumerateTransactions stamp: 'BSN 10/31/2025 15:20:14'!
+enumerateTransactions
+	assets do: [:anAccount | transactions addAll: (anAccount transactions)]!
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 15:20:55' prior: 50596339!
+transactions 
+	|transactionsa|
+	transactions = OrderedCollection new
+	assets do: [:anAccount | transactions addAll: (anAccount transactions)]
+	^ transactions ! !
+
+Object subclass: #FinancialAssets
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+!classDefinition: #FinancialAssets category: #Portfolio stamp: 'BSN 10/31/2025 15:21:05'!
+Object subclass: #FinancialAssets
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+FinancialAssets subclass: #Portfolio
+	instanceVariableNames: 'assets transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+!classDefinition: #Portfolio category: #Portfolio stamp: 'BSN 10/31/2025 15:21:18'!
+FinancialAssets subclass: #Portfolio
+	instanceVariableNames: 'assets transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+FinancialAssets subclass: #Portfolio
+	instanceVariableNames: 'assets'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+!classDefinition: #Portfolio category: #Portfolio stamp: 'BSN 10/31/2025 15:22:00'!
+FinancialAssets subclass: #Portfolio
+	instanceVariableNames: 'assets'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+FinancialAssets subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+
+!classDefinition: #ReceptiveAccount category: #Portfolio stamp: 'BSN 10/31/2025 15:22:07'!
+FinancialAssets subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio'!
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 15:22:22' prior: 50597087!
+transactions 
+	|transactions|
+	transactions = OrderedCollection new.
+	assets do: [:anAccount | transactions addAll: (anAccount transactions)].
+	^ transactions .! !
+!Portfolio methodsFor: 'control' stamp: 'BSN 10/31/2025 15:22:36' prior: 50597142!
+transactions 
+	|transactions|
+	transactions := OrderedCollection new.
+	assets do: [:anAccount | transactions addAll: (anAccount transactions)].
+	^ transactions .! !
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:22:41'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+FAILURE!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:22:44'!
+PASSED!
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Withdraw register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+	portfolio transactions!
+
+	(portfolio transactions at: 1) = (cuenta1  transactions at: 1).!
+
+	portfolio transactions!
+
+	portfolio transactions at: 1!
+
+	portfolio transactions at: 2!
+
+	portfolio transactions.!
+
+	(portfolio transactions at: 2) = (cuenta1  transactions at: 1).!
+
+	(portfolio transactions at: 2) = (cuenta2  transactions at: 1).!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'BSN 10/31/2025 15:23:43' prior: 50596960!
+transactions 
+
+	^ transactions copy.! !
+
+portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Withdraw register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.!
+
+	portfolio transactions.!
+
+	(portfolio transactions at: 1) = (cuenta2  transactions at: 1).!
+
+	(portfolio transactions at: 1) = (cuenta1  transactions at: 1).!
+
+	(portfolio transactions at: 1) = (cuenta2  transactions at: 1).!
+
+	(portfolio transactions at: 2) = (cuenta2  transactions at: 1).!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:24:10'!
+FAILURE!
+
+	portfolio transactions.!
+
+	cuenta2  transactions.!
+
+	cuenta1  transactions.!
+
+	(cuenta1 transactions) addAll: cuenta2 transactions.!
+
+	((cuenta1 transactions) addAll: cuenta2 transactions)!
+
+	cuenta1 transactions !
+
+	cuenta1 transactions. !
+
+	cuenta2 transactions. !
+
+	cuenta1 transactions. !
+
+	((cuenta1 transactions) addAll: cuenta2 transactions)!
+
+	(portfolio transactions at: 2) = (cuenta2  transactions at: 1).!
+
+	portfolio transactions!
+
+	(cuenta1 transactions , cuenta2 transactions)!
+
+	(portfolio transactions) = (cuenta1 transactions , cuenta2 transactions)!
+!FinancialAssetsTests methodsFor: 'tests' stamp: 'BSN 10/31/2025 15:27:19' prior: 50597058!
+test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente
+	| portfolio subPortfolio1 subPortfolio2 cuenta1 cuenta2 transaccion1 transaccion2 |
+	portfolio := Portfolio new.
+	subPortfolio1 := Portfolio new.
+	subPortfolio2 := Portfolio new.
+	
+	cuenta1 := ReceptiveAccount new.
+	cuenta2 := ReceptiveAccount new.
+	
+	transaccion1 := Deposit register: 50 on: cuenta1.
+	transaccion2 := Deposit register: 50 on: cuenta2.
+	
+	portfolio add: subPortfolio1.
+	subPortfolio1 add: cuenta1.
+	portfolio add: subPortfolio2.
+	subPortfolio2 add: cuenta2.
+	
+	self assert: (portfolio transactions) = (cuenta1 transactions , cuenta2 transactions)! !
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:27:21'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:27:23'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test01PortfolioNuevoEmpiezaSinCuentas stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test02PortfolioAgregaCorrectamenteUnaCuenta stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioAgregaCorrectamenteDosCuentas stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test03PortfolioSinCuentasDevuelveBalanceCero stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test05PortfolioConUnaCuentaDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test06PortfolioConDosCuentasDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test07PortfolioSinTrasaccionesDevuelveCollectionVacia stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test08PortfolioDevuelveUnaTransaccionDeUnaCuentaCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test09PortfolioDevuelveDosTransaccionesDeCuentasDistintas stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test10PortfolioSinTransaccionesNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test11PortfolioRegistraUnaTransaccionCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test12PortfolioRegistraDosTransaccionesDeCuentasDistintasCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test13ReceptiveAccountNoPuedeTenerCuentasAdentro stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test14PortfolioNoPuedeTenerCuentasRepetidas stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test15PortfolioNoPuedeTenerPortfoliosRepetidos stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test16PortfolioNoPuedeRegistrarTransacciones stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test17PortfolioConUnPortfolioVacioAdentroDevuelveBalanceEnCero stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test18PortfolioConUnPortfolioNoVacioAdentroDevuelveBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test19PortfolioConDosPortfoliosNoVaciosAdentroDevuelvenBalanceCorrecto stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test20PortfolioConUnPortfolioVacioAdentroDevuelveCollectionDeTransactionsVacia stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test21PortfolioConUnPortfolioNoVacioAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test22PortfolioConDosPortfoliosNoVaciosAdentroDevuelveTransactionsCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test23PortfolioConUnPortfolioVacioAdentroNoRegistraTransacciones stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test24PortfolioConUnPortfolioNoVacioAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
+
+!testRun: #FinancialAssetsTests #test25PortfolioConDosPortfoliosNoVaciosAdentroRegistraTransaccionesCorrectamente stamp: 'BSN 10/31/2025 15:27:38'!
+PASSED!
