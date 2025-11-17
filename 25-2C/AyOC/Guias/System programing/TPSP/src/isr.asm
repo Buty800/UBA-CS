@@ -133,7 +133,7 @@ ISRE 10
 ISRE 11
 ISRE 12
 ISRE 13
-ISRE 14 ; comentar esta línea en la parte 3 (paginación)
+;ISRE 14 ; comentar esta línea en la parte 3 (paginación)
 ISRNE 15
 ISRNE 16
 ISRE 17
@@ -143,35 +143,59 @@ ISRNE 20
 
 ;; Rutina de atención de Page Fault ISRE 14 ; Descomentar esta rutina en la parte 3 (paginación)
 ;; -------------------------------------------------------------------------- ;;
-;global _isr14
+global _isr14
+_isr14:
+	; Estamos en un page fault.
+	pushad
+  ; llamar rutina de atención de page fault, pasandole la dirección que se intentó acceder
+  mov eax,cr2 
+  push eax 
+  call page_fault_handler
+  mov bl,al 
+  pop eax 
+  cmp bl,1 
+  je .fin 
 
-;_isr14:
-;	add esp, 4 ; error code
-;	iret
+  .ring0_exception:
+	; Si llegamos hasta aca es que cometimos un page fault fuera del area compartida.
+  call kernel_exception
+  jmp $
+
+  .fin:
+	popad
+	add esp, 4 ; error code
+	iret
 
 ;; Rutina de atención del RELOJ
 ;; -------------------------------------------------------------------------- ;;
 global _isr32
 ; COMPLETAR (Parte 2: Interrupciones): La rutina se encuentra escrita parcialmente. Completar la rutina
 _isr32:
-    pushad
-    ; 1. Le decimos al PIC que vamos a atender la interrupción
-    call pic_finish1
-    
+  pushad
+  ; 1. Le decimos al PIC que vamos a atender la interrupci�n
+    ; COMPLETAR
+  call pic_finish1
+  
     ; 2. Imprimimos el reloj que gira en pantalla
-    call next_clock
-    
+    ; COMPLETAR
+  call next_clock
+  
     ; 3. Realizamos el cambio de tareas en caso de ser necesario
     ; COMPLETAR
+  call sched_next_task
 
-    .fin:
-    ; 3. Actualizamos las estructuras compartidas ante el tick del reloj
-    call tasks_tick
-    ; 4. Actualizamos la "interfaz" del sistema en pantalla
-    call tasks_screen_update
-    popad
-    iret
-
+  str cx
+  cmp ax, cx
+  je .fin
+  
+  mov word [sched_task_selector], ax
+  jmp far [sched_task_offset]
+  
+  .fin:
+  call tasks_tick
+  call tasks_screen_update
+  popad
+  iret
 ;; Rutina de atención del TECLADO
 ;; -------------------------------------------------------------------------- ;;
 global _isr33
@@ -184,7 +208,7 @@ _isr33:
     ; 2. Leemos la tecla desde el teclado y la procesamos con la funcion tasks_input_process
     in al,0x60
     push eax
-    call process_scancode
+    call tasks_input_process
     add esp,4
     
     popad
@@ -199,9 +223,11 @@ global _isr88
 ; Para la seccion de interrupciones: que modifique el valor de eax por 0x58
 ; Para las secciones de paginación y tareas: que llame a la funcion task_syscall_draw
 _isr88:
-  
-  mov eax, 0x58  
-
+  pushad
+  push eax
+  call tasks_syscall_draw
+  add esp, 4
+  popad
   iret
 
 

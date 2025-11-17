@@ -16,12 +16,18 @@ extern idt_init
 extern pic_reset
 extern pic_enable
 extern mmu_init_kernel_dir
+extern tss_init
+extern tasks_screen_draw
+extern sched_init
+extern tasks_init
 ; COMPLETAR - Definan correctamente estas constantes cuando las necesiten
 %define CS_RING_0_SEL (1<<3)    ;0x08   
 %define DS_RING_0_SEL (3<<3)    ;0x18 
 ;Defines propios
 %define KERNEL_STACK 0x25000
-
+%define TSS_INITIAL_SEL 11 << 3
+%define TSS_IDLE_SEL 12 << 3   
+%define DIVISOR 1193
 BITS 16
 ;; Saltear seccion de datos
 jmp start
@@ -129,11 +135,13 @@ modo_protegido:
     ; COMPLETAR - reemplazar la implementacion de la interrupcion 88 (ver comentarios en isr.asm)
     ; COMPLETAR - las funciones en tss.c
     ; COMPLETAR - Inicializar tss
-
+    call tss_init
+    call tasks_screen_draw
+    
     ; COMPLETAR - Inicializar el scheduler
-
+    call sched_init
     ; COMPLETAR - Inicializar las tareas
-
+    call tasks_init
 
     ; ===================================
     ; ||   (Parte 2: Interrupciones)   ||
@@ -148,11 +156,21 @@ modo_protegido:
     ; COMPLETAR - Reiniciar y habilitar el controlador de interrupciones (ver pic.c)
     call pic_reset
     call pic_enable
+    
+
+    mov ax, DIVISOR
+
+    out 0x40, al
+
+    rol ax, 8
+
+    out 0x40, al
 
     ; COMPLETAR - Rutinas de atención de reloj, teclado, e interrupciones 88 y 89 (en isr.asm)
 
     ; COMPLETAR (Parte 4: Tareas)- Cargar tarea inicial
-
+    mov ax,TSS_INITIAL_SEL
+    ltr ax
     ; COMPLETAR - Habilitar interrupciones (!! en etapas posteriores, evaluar si se debe comentar este código !!)
     sti 
     ; NOTA: Pueden chequear que las interrupciones funcionen forzando a que se
@@ -175,7 +193,8 @@ modo_protegido:
     ; COMPLETAR - Restaurar directorio de paginas del kernel
 
     ; COMPLETAR - Saltar a la primera tarea: Idle
-
+    jmp TSS_IDLE_SEL:0
+    
     ; Ciclar infinitamente 
     mov eax, 0xFFFF
     mov ebx, 0xFFFF
