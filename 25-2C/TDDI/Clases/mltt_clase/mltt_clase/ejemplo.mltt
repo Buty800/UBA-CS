@@ -1,0 +1,44 @@
+
+axiom Eq : (A : Type) (a b : A) -> Type
+
+axiom refl : (A : Type) (a : A) -> Eq A a a
+
+axiom ind_Eq : (A : Type)
+               (C : (a b : A) (p : Eq A a b) -> Type)
+               (Cr : (a : A) -> C a a (refl A a))
+               (a b : A)
+               (p : Eq A a b)
+            -> C a b p
+
+def sym : (A : Type) (a b : A) -> Eq A a b -> Eq A b a
+  = \ (A : Type) ->
+      ind_Eq A
+             (\ (a b : A) (p : Eq A a b) -> Eq A b a)
+             (\ (a : A) -> refl A a)
+
+def trans : (A : Type) (a b : A)
+          -> Eq A a b
+          -> (c : A) -> Eq A b c -> Eq A a c
+  = \ (A : Type) ->
+      ind_Eq A
+             (\ (a b : A) (p : Eq A a b) -> (c : A) -> Eq A b c -> Eq A a c)
+             (\ (a : A) (c : A) (q : Eq A a c) -> q) 
+
+axiom Nat : Type
+
+axiom zero : Nat
+
+axiom succ : Nat -> Nat
+
+axiom ind_Nat : (C : Nat -> Type)
+              -> C zero
+              -> ((n : Nat) -> C n -> C (succ n))
+              -> (n : Nat) -> C n
+
+def suma : Nat -> Nat -> Nat
+  = ind_Nat (\ (n : Nat) -> Nat -> Nat)
+            (\ (m : Nat) -> m)
+            (\ (n : Nat) (r : Nat -> Nat) (m : Nat) -> succ (r m))
+
+check suma zero zero
+

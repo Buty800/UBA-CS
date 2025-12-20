@@ -101,6 +101,7 @@ cabal.project.local~
 #*.image
 #*.sources
 #*.playground
+Cuis/
 
 # =========================
 # Archivos de Prolog

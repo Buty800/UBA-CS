@@ -1,0 +1,26 @@
+
+-- Definición de los números naturales
+
+{-
+data Nat : Set where
+  zero : Nat
+  succ : Nat -> Nat
+-}
+
+axiom Nat : Type
+
+axiom zero : Nat
+
+axiom succ : Nat -> Nat
+
+axiom ind_Nat : (C : Nat -> Type) 
+              -> C zero
+              -> ((n : Nat) -> C n -> C (succ n))
+              -> (n : Nat) -> C n
+
+def suma : Nat -> Nat -> Nat
+  = ind_Nat (\ (n : Nat) -> Nat -> Nat)
+            (\ (m : Nat) -> m)
+            (\ (n : Nat) (r : Nat -> Nat) (m : Nat) -> succ (r m))
+
+check suma zero zero

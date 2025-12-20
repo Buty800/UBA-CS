@@ -11,6 +11,7 @@ Incluye código, notas y materiales organizados por año y materia.
 **Leyenda:**
 - ✅ Aprobada  
 - 🧠 En curso  
+- 🧾 Final pendiente
 - ⏳ Pendiente  
 
 ## Materias obligatorias
@@ -26,9 +27,9 @@ Incluye código, notas y materiales organizados por año y materia.
 | Paradigmas de Programación | ✅ | 1C 2025 |
 | Lenguajes Formales Autómatas y Computabilidad | ✅ | 1C 2025 |
 | Álgebra Lineal Computacional | ✅ | 1C 2025 |
-| Arquitectura y Organización de Computadores | 🧠 | 2C 2025 |
-| Ingeniería de Software | 🧠 | 2C 2025 |
-| Complejidad Computacional | 🧠 | 2C 2025 |
+| Arquitectura y Organización de Computadores | 🧾 | 2C 2025 |
+| Ingeniería de Software | 🧾 | 2C 2025 |
+| Complejidad Computacional | 🧾 | 2C 2025 |
 | Sistemas Operativos | ⏳ | — |
 | Almacenamiento y Recuperación de la Información | ⏳ | — |
 | Estadística Computacional | ⏳ | — |
@@ -45,7 +46,7 @@ Incluye código, notas y materiales organizados por año y materia.
 | Materia optativa | Estado | Cuatrimestre aprobado / notas |
 |---|---|---|
 | Álgebra Lineal (Para Matemáticos) | ✅ | 2C 2024 |
-| Tipos Dependientes y Demostradores Interactivos  | 🧠 | 2C 2025 |
+| Tipos Dependientes y Demostradores Interactivos  | ✅ | 2C 2025 |
 
 ---
 
