@@ -1,0 +1,180 @@
+Preguntas:
+1. Se presenta el siguiente diagrama simplificado de un pipeline:
+                        [IF] -> [ID] -> [EX] -> [MEM] -> [WB]
+
+   • IF: búsqueda de instrucción.
+   • ID: decodificación y lectura del banco de registros (Register File).
+   • EX: ALU.
+   • MEM: acceso a memoria de datos (solo para LW/SW).
+   • WB: escritura en el banco de registros.
+   El diseñador decide eliminar el camino de Forwarding entre MEM y EX porque "la mayoría de las instrucciones ya habrán escrito el dato cuando éste sea necesario".
+   Analice la decisión y construya un ejemplo donde el procesador produzca una cantidad innecesaria de stalls.
+   Explique detalladamente qué ocurre ciclo por ciclo.
+
+2. Considere el siguiente código:
+   LOOP:
+      LW   R1, [R2]   ; Leer el primer valor
+      LW   R3, [R2+4] ; Leer el segundo valor
+      ADD  R4, R1, R3 ; Suma de los dos valores leídos desde memoria
+      SW   R4, [R2+8] ; Escritura de 4 bytes
+      ADDI R2, R2, 12 ; Incremento de 12 bytes
+      BNE  R2, R5, LOOP ; Salto condicional si R2 != R5
+
+   Se pide analizar el comportamiento del programa sobre un procesador con pipeline clásico de 5 etapas sin forward ni predicción de saltos.
+   Para ello:
+   • Identifique todos los riesgos de datos presentes, indicando entre qué instrucciones aparecen.
+   • Indique cuáles pueden resolverse mediante Forwarding y cuáles requieren introducir stalls.
+   • Explique qué sucede al ejecutar la instrucción de salto y qué penalidad introduce.
+   • Analice cómo cambiaría la ejecución si el procesador incorporara ejecución fuera de orden.
+   Justifique detalladamente cada respuesta.
+
+3. Explique por qué el algoritmo de Tomasulo utiliza un Common data bus de resultados.
+   ¿Qué inconvenientes aparecerían si cada Reservation Station consultara periódicamente el banco de registros arquitectónico para saber si un operando ya fue calculado?
+
+4. Considere un sistema con L1 privadas por núcleo y protocolo MESI con snooping.
+   Dos núcleos ejecutan el siguiente pseudocódigo:
+      while (1) {
+         x++;
+      }
+   donde ambos incrementan exactamente la misma variable. Asuma que x++ es atómico sobre x.
+   Explique detalladamente:
+   • ¿Cómo evolucionan los estados MESI?
+   • ¿Qué mensajes aparecen sobre el bus?
+   • ¿Por qué el rendimiento cae drásticamente?
+   • ¿Por qué el problema no depende de la velocidad del procesador?
+   • ¿Qué modificaciones de software podrían disminuir este efecto?
+
+5. Se desea simplificar el protocolo MESI eliminando completamente el estado Exclusive. El diseñador argumenta que el protocolo MSI ya funciona correctamente.
+   Analice:
+   • ¿El sistema continúa siendo coherente?
+   • ¿En qué situaciones se pierde rendimiento?
+   • ¿En qué patrones de acceso se observa la diferencia?
+
+6. Explique qué diferencias existen entre aumentar el tamaño de una memoria caché y aumentar su asociatividad.
+   ¿Ambas modificaciones reducen los mismos tipos de fallos?
+   En su respuesta analice los distintos tipos de miss y cómo cada modificación afecta a cada uno de ellos.
+   
+Respuestas:
+
+1. 
+
+Análisis de la decisión del diseñador
+La decisión del diseñador de eliminar el camino de forwarding entre MEM y EX basándose en que "la mayoría de las instrucciones ya habrán escrito el dato" es errónea y perjudicará notablemente la eficiencia del procesador. En la práctica de la programación, es muy común que una instrucción requiera un dato poco después de que una instrucción previa lo calcule o lo cargue, produciendo dependencias que se conocen como obstáculos de datos (data hazards).
+El objetivo fundamental del forwarding es extraer el resultado directamente cuando está disponible (ya sea a la salida de la ALU o de la memoria) y enviarlo a la etapa que lo requiere en el mismo ciclo, ahorrando la necesidad de esperar a que la instrucción original escriba el resultado en el banco de registros en la etapa WB. Al eliminar el forwarding desde la etapa MEM, cualquier instrucción sucesora que requiera un dato cargado desde la memoria (o calculado por la ALU un ciclo atrás) se verá forzada a detenerse (pipeline stall) esperando que termine la etapa WB, lo cual incrementa el CPI (Ciclos Por Instrucción) de manera innecesaria y degrada la performance.
+Ejemplo demostrativo y análisis ciclo por ciclo
+Para ilustrar este escenario, consideremos un fragmento de código clásico mencionado en los textos donde una instrucción de carga de memoria es seguida por una operación aritmética que necesita ese dato:
+
+    LW R1, [R2] (Carga un dato de la memoria de datos y lo debe guardar en el registro R1)
+    SUB R4, R1, R5 (Resta, utilizando el registro R1 como operando)
+
+A continuación, se detalla qué ocurre ciclo por ciclo en este pipeline modificado (sin forwarding MEM -> EX):
+
+    Ciclo 1: La instrucción LW ingresa a la etapa IF (búsqueda de instrucción).
+    Ciclo 2: LW avanza a la etapa ID (decodificación). La instrucción SUB ingresa a la etapa IF.
+    Ciclo 3: LW entra a la etapa EX para calcular la dirección de memoria. SUB entra a ID, decodifica sus operandos y descubre una dependencia: necesita leer el registro R1, pero hasta que la instrucción LW no complete su operación, R1 no tiene un valor válido.
+    Ciclo 4: LW avanza a la etapa MEM y obtiene el dato desde la memoria. La instrucción SUB sufre un primer stall (atasco) en ID porque el dato de R1 aún no está disponible en el banco de registros.
+    Ciclo 5: LW entra a la etapa WB para escribir finalmente el dato traído de la memoria en R1. En un procesador con el camino de forwarding intacto, el dato recién salido de MEM se hubiera inyectado directamente a EX para que SUB pudiera ejecutarse aquí. Sin embargo, como el diseñador eliminó este camino de forwarding, el dato no puede adelantarse. La instrucción SUB debe seguir esperando sin hacer nada, sufriendo un segundo stall innecesario en la etapa ID.
+    Ciclo 6: LW ya finalizó y el valor de R1 se ha "impactado" con éxito en el banco de registros dentro del procesador. La instrucción SUB finalmente puede leer el valor correcto en ID y avanzar a la etapa EX para realizar su operación.
+
+Impacto: Con el camino de forwarding original (MEM -> EX), esta dependencia (Read After Write o RAW) provoca solo 1 ciclo de stall inevitable porque la memoria no entrega el dato hasta el final de la etapa MEM. Sin embargo, la decisión del diseñador de quitar este atajo obliga a que el procesador ponga en estado idle a la unidad de ejecución y genere múltiples ciclos perdidos adicionales esperando pasivamente a la etapa WB
+
+2. 
+
+Riesgos de datos presentes en el código
+En este fragmento de código encontramos múltiples riesgos de datos (data hazards), específicamente del tipo RAW (Read After Write), que ocurren cuando una instrucción necesita usar como operando un registro en el que otra instrucción previa escribirá su resultado. Los riesgos presentes son:
+
+    RAW en R1: Entre la instrucción 1 (LW R1, [R2]) y la instrucción 3 (ADD R4, R1, R3). La suma necesita el valor que la carga de memoria deposita en R1.
+    RAW en R3: Entre la instrucción 2 (LW R3, [R2+4]) y la instrucción 3 (ADD R4, R1, R3). La suma requiere el valor que esta segunda carga guarda en R3.
+    RAW en R4: Entre la instrucción 3 (ADD R4, R1, R3) y la instrucción 4 (SW R4, [R2+8]). La escritura en memoria necesita el resultado de la suma calculada en R4.
+    RAW en R2: Entre la instrucción 5 (ADDI R2, R2, 12) y la instrucción 6 (BNE R2, R5, LOOP). El salto condicional necesita el valor actualizado de R2 para evaluar la condición.
+
+(Nota: En una ejecución estándar, existe también un riesgo de tipo WAR (Write After Read) sobre el registro R2 entre las instrucciones de memoria (LW, SW) y la instrucción ADDI, ya que ADDI no debe sobreescribir R2 antes de que las operaciones de memoria calculen sus direcciones, aunque un pipeline in-order clásico resuelve esto naturalmente).
+Resolución mediante Forwarding y necesidad de Stalls
+La técnica de Forwarding (o adelantamiento) permite extraer el resultado directamente de la salida de la unidad de ejecución (ALU o memoria) y enviarlo a la etapa que lo requiere en el mismo ciclo, evitando esperar a que el dato se escriba en el banco de registros.
+
+    Riesgos resueltos con Forwarding (0 stalls):
+        La dependencia de R1 se resuelve con forwarding sin stalls porque hay una instrucción intermedia (LW R3) que separa a LW R1 del ADD, dando el tiempo exacto para que el dato salga de la etapa MEM de LW R1 y se inyecte en la etapa EX del ADD.
+        La dependencia de R4 (de ALU a Memoria) se resuelve adelantando el dato desde la salida de la etapa EX del ADD hacia la etapa MEM del SW.
+        La dependencia de R2 se resuelve adelantando el resultado desde la etapa EX de ADDI a la etapa EX del salto condicional BNE.
+    Riesgos que requieren Stall (Load-Use hazard):
+        La dependencia sobre R3 no es factible de resolverse solo con forwarding. Como ADD necesita R3 en su etapa de ejecución (EX) exactamente en el mismo ciclo en el que LW R3 recién está extrayendo el dato en su etapa de memoria (MEM), el dato no puede adelantarse a tiempo. Obligatoriamente se debe introducir 1 ciclo de stall para detener a la instrucción ADD hasta que el dato de memoria esté disponible.
+
+Comportamiento de la instrucción de salto y su penalidad
+Un salto o branch es una discontinuidad en el flujo de ejecución que genera lo que se conoce como un obstáculo de control. Como el pipeline clásico busca instrucciones asumiendo una secuencia lineal, al llegar a un salto condicional como BNE, debe evaluar la condición.
+En este pipeline clásico de 5 etapas, la condición del salto (si es taken o non-taken) recién se verifica en la fase de ejecución (EX). Si la evaluación resulta verdadera (el salto se toma o branch taken), el procesador descubre que las instrucciones que pre-procesó en las etapas anteriores (Búsqueda y Decodificación) son incorrectas. En ese momento, debe descartar ese trabajo vaciando el pipeline (haciendo un flush), lo que genera una caída en la performance conocida como branch penalty (la conspiración de los branches). Esta penalidad obligará a que el primer resultado válido se obtenga varios ciclos de reloj más tarde.
+Impacto de la Ejecución Fuera de Orden (Out-of-Order Execution)
+Si el procesador implementara Ejecución Fuera de Orden (OoO), la microarquitectura intentaría enviar instrucciones a las unidades de ejecución independientemente del orden en que aparecen en el código, evitando que las unidades funcionales queden ociosas por culpa de un stall.
+En el código dado, cuando la instrucción ADD R4, R1, R3 se atasque esperando el dato de memoria de LW R3 (generando un stall), un procesador in-order detendría a todo el pipeline. Sin embargo, un procesador fuera de orden usaría estructuras de hardware avanzado (como Reservation Stations y la Register Alias Table) para mantener la instrucción ADD "en espera" de sus operandos y permitiría que la instrucción independiente ADDI R2, R2, 12 sea despachada y ejecutada antes.
+Al ejecutar ADDI fuera de orden (antes o durante las cargas y escrituras previas que aún necesitan usar el valor "viejo" de R2), se exponen severos riesgos estructurales y falsas dependencias como WAR (Write After Read) y WAW (Write After Write). Para evitar que ADDI corrompa la lectura de R2 que necesitan las instrucciones previas, el procesador OoO aplica Register Renaming, asignando etiquetas (tags) temporales a los resultados mediante la Register Alias Table (RAT), desvinculando la dependencia y preservando estrictamente la lógica original concebida por el programador. Por lo tanto, el salto en rendimiento provendría de poder adelantar el incremento del puntero (ADDI) y la evaluación del salto mientras se resuelven las lentas lecturas de memoria.
+
+
+3. 
+
+Por qué el algoritmo de Tomasulo utiliza un Common Data Bus (CDB)
+El algoritmo de Tomasulo introduce el Common Data Bus (CDB) para implementar un enlace (link) directo y eficiente entre la instrucción que produce un dato y las instrucciones consumidoras que lo necesitan.
+La función del CDB es actuar como un canal de interconexión (datapath) que atraviesa las Unidades Funcionales, las Reservation Stations (RS) y la Register Alias Table (RAT). Cada vez que una Unidad de Ejecución termina de procesar una instrucción y obtiene un resultado, transmite dicho resultado mediante broadcast a través del CDB, emitiendo un par compuesto por el Valor calculado y su Tag (etiqueta) identificador.
+Al hacer este broadcast, todas las Reservation Stations que están almacenando instrucciones en espera de ese operando (cuyo Tag coincide) capturan el dato simultáneamente de la red. En cuanto una instrucción en una RS recibe todos los operandos que le faltaban, su estado cambia a "Ready" y se dispara (despacha) inmediatamente hacia la Unidad Funcional correspondiente para ser ejecutada. En definitiva, el CDB extiende y masifica el concepto de forwarding, siendo la pieza crucial para minimizar los tiempos perdidos por obstáculos de datos verdaderos (RAW).
+Inconvenientes de que cada Reservation Station consulte periódicamente el banco de registros
+Si el diseñador decidiera no utilizar el CDB y obligara a las Reservation Stations a consultar (mediante encuestas o polling periódico) el banco de registros arquitectónico para saber si un operando ya fue calculado, aparecerían tres graves problemas en la microarquitectura:
+
+    Aparición de cuellos de botella y Obstáculos Estructurales severos: El banco de registros tiene una cantidad limitada de puertos de lectura y escritura. Si múltiples Reservation Stations estuviesen intentando leer simultáneamente y de manera periódica los registros arquitectónicos para verificar la disponibilidad de sus operandos, se produciría una enorme contención y colisión por el acceso a dichos puertos. Esto generaría graves obstáculos estructurales que obligarían a introducir constantes stalls a lo largo de todo el pipeline, paralizando la emisión y ejecución fuera de orden de las instrucciones.
+    Incremento injustificado de latencias por riesgos RAW: En un esquema con CDB, el resultado viaja desde la salida de la ALU directo a la estación que lo necesita en el mismo instante. Si se dependiera de leer el banco de registros, las instrucciones en las RS tendrían que esperar pasivamente varios ciclos adicionales hasta que la instrucción productora termine su etapa de ejecución, transite hacia la fase final del pipeline, e impacte el resultado físicamente en el registro. Esto destruiría la ventaja de latencia que busca la ejecución fuera de orden al demorar el inicio de las instrucciones dependientes.
+    Destrucción del renombre de registros (Register Renaming) y reaparición de riesgos WAR y WAW: El éxito de la técnica de Tomasulo radica en la técnica de Register Renaming, que utiliza las etiquetas (Tags) para desvincular los registros lógicos de las dependencias falsas (Write After Read y Write After Write). El banco de registros arquitectónico solo almacena los valores confirmados y consolidados del programa. Si las RS consultaran el banco de registros, serían incapaces de distinguir los valores intermedios o especulativos asociados a un Tag específico que se ejecutan fuera de orden. El CDB soluciona esto porque no solo transporta el valor, sino el Tag; esto le asegura a la RS que el dato que está tomando en vuelo pertenece estrictamente a la instrucción de la cual depende, preservando a la perfección el comportamiento original del código sin riesgo a que otra instrucción lo sobreescriba temporalmente
+    
+4. 
+
+Evolución de los estados MESI En este escenario, ambos núcleos compiten incesantemente por escribir en la misma dirección de memoria correspondiente a la variable x. Dado que el protocolo MESI utiliza una política de write invalidate (asegura el acceso exclusivo de un procesador antes de que la escritura se lleve a cabo), la línea de caché que contiene a x alternará de forma continua entre los estados Modified (M) e Invalid (I).
+Cuando el Núcleo 1 ejecuta x++, obtiene la propiedad de la línea de caché y, al modificarla, la pasa al estado Modified. Inmediatamente después, cuando el Núcleo 2 intenta ejecutar x++, genera un fallo de caché para escritura (Write Miss); el Núcleo 1 detecta esto mediante el Snoop Bus, actualiza el dato hacia el nivel de memoria inferior y marca su copia como Inválida (I). El Núcleo 2 entonces recibe la línea y la pasa a estado Modified. Este ciclo se repetirá infinitamente, haciendo que la línea casi nunca pase por los estados Shared (S) o Exclusive (E) de forma estable.
+Mensajes que aparecen sobre el bus A raíz de la competencia por la modificación de la variable, el bus del sistema estará saturado y dominado por dos tipos de transacciones principales:
+
+    Read For Ownership (RFO) o Write Miss: Esta operación exclusiva es enviada continuamente por la caché del núcleo que necesita realizar el incremento y escribir en la línea, forzando a que el otro controlador invalide su copia.
+    Write Back (o Copy Back): Como el núcleo que actualmente posee la línea siempre la tiene en estado Modified (sucia), cada petición RFO del núcleo rival obligará al propietario actual a detenerse y realizar una actualización del dato en la memoria inferior para mantener la coherencia, justo antes de invalidar su copia.
+
+Por qué el rendimiento cae drásticamente El rendimiento se desploma porque el acierto en caché (Hit Rate) para esta variable se reduce a cero. Al invalidarse mutuamente las copias de L1 en cada iteración, el procesador se vuelve incapaz de aprovechar la velocidad de la caché. Cada operación de incremento resulta en un fallo de caché (Cache Miss) que detiene al pipeline introduciendo ciclos de atasco por memoria (Memory stall cycles). El procesador trabajará a la bajísima velocidad dictada por el ancho de banda y la latencia del bus del sistema y la memoria inferior (Miss penalty), no a la velocidad de la caché L1.
+Por qué el problema no depende de la velocidad del procesador El tiempo de ejecución de una CPU obedece a la fórmula: CPUExecTime​=(CPUClockCycles​+MemoryStallcycles​)∗PeriodoClock​. Al generarse un fallo en cada iteración, los ciclos de atasco por espera de memoria dominan por completo el tiempo de ejecución. Incrementar la frecuencia del reloj (MHz/GHz) del procesador no acelera en absoluto el tiempo que tardan el bus del sistema y la memoria DRAM en resolver los Write Backs y entregar la línea de caché. El procesador simplemente pasará la inmensa mayoría de sus ciclos ultra-rápidos insertando estados de espera (Wait States) de forma pasiva.
+Modificaciones de software para disminuir este efecto (Nota: La solución de software detallada a continuación no proviene estrictamente de las fuentes provistas, sino de principios generales de arquitectura de computadoras en sistemas paralelos).
+Este efecto se conoce como True Sharing (uso compartido verdadero) o cache line ping-ponging. Para resolverlo por software, se debe evitar que los núcleos escriban concurrentemente sobre la misma variable de memoria. La técnica clásica consiste en que cada hilo utilice una variable local (privada) almacenada en un registro o en una línea de memoria independiente para procesar sus operaciones.
+
+// Ejecutado en cada núcleo:
+int local_x = 0;
+while (1) {
+    local_x++;
+    // Ocasionalmente, o al final de un ciclo útil, sincronizar:
+    // atomic_add(&x, local_x);
+    // local_x = 0;
+}
+
+Al usar variables locales, el incremento ocurre de forma transparente dentro de la caché L1 de cada núcleo en estado Modified, obteniendo una tasa de aciertos (Hit Rate) del 100% y eliminando por completo el tráfico de invalidación y los RFO en el bus del sistema.
+
+5. 
+
+¿El sistema continúa siendo coherente?
+Sí, el sistema continuará siendo plenamente coherente. El protocolo MSI es de hecho el modelo básico y funcional de tres estados (Modified, Shared, Invalid) que garantiza la coherencia de los datos en esquemas de tipo write-invalidate,. Al obligar a que cualquier procesador que desee escribir en una línea compartida deba invalidar primero las copias del resto, se preserva correctamente la unicidad del dato modificado.
+¿En qué situaciones se pierde rendimiento?
+La pérdida de rendimiento se da por un incremento innecesario en la actividad y el tráfico del bus del sistema. El diseñador pasa por alto que el propósito principal de agregar el estado Exclusive (E) al protocolo MESI es precisamente disminuir esta congestión en el bus,.
+El estado Exclusive identifica que una línea ha sido traída al caché local, que es idéntica a la copia en la memoria principal (clean), y, lo más importante, que ningún otro caché tiene una copia de la misma.
+Si se elimina este estado (volviendo a MSI), cualquier lectura de un dato que no esté en ningún otro caché ingresará forzosamente en estado Shared. Si posteriormente el procesador necesita escribir en esa misma línea, el protocolo asumirá que el dato podría estar compartido y obligará al controlador a emitir un mensaje de invalidación por el bus del sistema (como un requerimiento Read For Ownership o un Write Miss) para asegurarse de que nadie más lo tenga,. En contraste, con el estado Exclusive del protocolo MESI intacto, el procesador sabe que es el único dueño de la línea y puede escribir en ella transitando silenciosamente al estado Modified, sin necesidad de notificar ni propagar el cambio en el bus,.
+¿En qué patrones de acceso se observa la diferencia?
+Esta degradación en el rendimiento se hace muy evidente en patrones de acceso de lectura seguida de escritura (read-modify-write) sobre variables que son de uso privado o local a un hilo de ejecución (datos no compartidos reales).
+Cuando un núcleo ejecuta un código que lee una variable privada de memoria para luego modificarla (por ejemplo, el incremento de un contador local), el protocolo MESI resuelve el primer Read Miss trayendo la línea en estado Exclusive al verificar por el Snoop Bus que nadie más la posee. Inmediatamente después, el procesador ejecuta la escritura resolviéndola como un Hit interno, pasando a estado Modified sin usar el bus del sistema.
+Sin embargo, al utilizar MSI, este mismo patrón de acceso requiere transaccionar en el bus dos veces: una para traer el dato (quedando en Shared), y otra transacción obligatoria en el bus para requerir la exclusividad y poder escribir, penalizando enormemente la performance del sistema multiprocesador al ocupar ancho de banda valioso en invalidar líneas que en realidad nadie más tenía
+
+6. 
+
+Diferencias entre aumentar el tamaño y aumentar la asociatividad
+Aumentar el tamaño de la memoria caché y aumentar su asociatividad son dos decisiones de diseño distintas que alteran la microarquitectura de la memoria con el fin de mejorar su tasa de aciertos (Hit Rate):
+
+    Aumentar el tamaño: Implica incrementar la capacidad total de almacenamiento de la caché (agregando más líneas o bloques totales). El objetivo de una caché más grande es ser "suficientemente grande para que el procesador resuelva la mayor cantidad posible de búsquedas de código y datos". Sin embargo, la limitación de este enfoque es que penaliza directamente el costo de fabricación y aumenta el consumo de energía del sistema.
+    Aumentar la asociatividad: No implica necesariamente cambiar la capacidad total de la memoria, sino modificar su criterio de ubicación (Line Placement). Esto significa agrupar las líneas de la caché en conjuntos o "vías" (sets). Mientras que en una caché de mapeo directo (1 vía) un dato solo puede ir a una única línea específica, al aumentar la asociatividad (por ejemplo, Set-Associative de 4 u 8 vías) ese mismo dato puede alojarse en cualquiera de las múltiples líneas disponibles dentro de un mismo conjunto. La máxima asociatividad (Fully Associative) permite colocar el bloque en cualquier línea libre de la caché. Aumentar la asociatividad requiere implementar comparadores paralelos de etiquetas (Tags), lo que aumenta la complejidad del hardware, el tiempo de búsqueda y el consumo energético.
+
+¿Reducen los mismos tipos de fallos (Misses)?
+No, ambas modificaciones abordan el problema de los fallos desde ángulos distintos y atacan principalmente a diferentes tipos de miss:
+1- Aumento de Asociatividad y los Fallos por Conflicto (Conflict Misses): Aumentar la asociatividad es una técnica diseñada específicamente para tratar y disminuir la probabilidad de Conflict Miss.
+
+    Qué lo causa: Un Conflict Miss ocurre cuando "dos líneas frecuentemente utilizadas mapean sobre la misma línea del cache, generando desalojos recíprocos". Esto es una debilidad propia del mapeo directo (Direct Mapped), donde si la CPU alterna lecturas entre direcciones que matemáticamente se traducen en el mismo índice de línea, se expulsarán mutuamente de la caché degradando severamente la performance.
+    Cómo lo resuelve: Al agregar más "vías" (asociatividad), el caché adquiere flexibilidad. Varias líneas de memoria principal que compiten por la misma ubicación pueden ahora coexistir pacíficamente en distintas vías del mismo conjunto (set), eliminando los desalojos recíprocos provocados por la rigidez del mapeo. Un diseño Fully Associative elimina por completo los Conflict Misses al tener máxima flexibilidad.
+
+2- Aumento de Tamaño y los Fallos de Capacidad: Aumentar el tamaño físico de la caché ataca fundamentalmente a la falta de espacio para alojar el contexto de trabajo del procesador.
+
+    Qué lo causa: Aunque los textos suministrados no usen textualmente el término académico Capacity Miss, el concepto se describe al afirmar que la caché ideal debe ser "suficientemente grande" para resolver las búsquedas del procesador. Un fallo por capacidad ocurre simplemente porque el programa activo maneja un volumen de datos y código superior al tamaño total de la caché, provocando que datos útiles deban ser expulsados para hacer lugar a los nuevos.
+    Cómo lo resuelve: Al proveer más líneas de almacenamiento en total, el procesador puede retener una "copia de los datos e instrucciones que está utilizando, o cuya probabilidad de ser requeridos en lo inmediato es muy alta", resolviendo el problema por pura disponibilidad de espacio. Indirectamente, al haber más líneas totales, la fórmula de ubicación (el módulo matemático) distribuye las direcciones en un espectro más amplio, lo que también ayuda ligeramente a que haya menos colisiones, pero su propósito nativo es incrementar la cantidad neta de bloques que la memoria puede resguardar simultáneamente.

@@ -1,0 +1,220 @@
+Preguntas:
+
+1. En una memoria caché, administrada mediante el protocolo MESI, ¿Cómo se gestiona un write miss basado en cada estado de la línea?. Explicar en cada caso los pasos detallados que sigue el protocolo, señales involucradas entre los controladores cache, estados eléctricos del bus en cada core, y estado final que toman las líneas involucradas.
+
+2. La diferencia entre un protocolo de coherencia MESI y MESIF es el agregado del estado Forwarder.
+Explicar las ventajas que tiene sobre el protocolo MESI. Explicar su funcionamiento. ¿Cual es la situación
+si se desaloja la línea en estado “F” y como se recupera el protocolo de esa situación?
+
+3. Explicar los conceptos de localidad temporal y espacial.
+
+4. Políticas de escritura para la memoria cache. Funcionamiento pros y cons de c/u.
+
+5. Protocolos de coherencia Directory Based y Snoopy Based. Funcionamiento, pros y cons.
+
+6. Predicción de saltos: Explicar el funcionamiento de los métodos e implementaciones que conozca.
+
+7. Considerar el siguiente código:
+    1 LDR R1, [R2] ; R1 = Mem[R2]
+    2 ADD R3, R1, R4 ; R3 = R1 + R4
+    3 MUL R1, R5, R6 ; R1 = R5 * R6
+    4 SUB R4, R3, R7 ; R4 = R3 - R7
+    5 STR R4, [R8] ; Mem[R8] = R4
+    6 ADD R2, R1, R9 ; R2 = R1 + R9
+
+8. Identificar qué riesgos están presentes en el código: RAW, WAW y WAR. ¿Qué dependencias desaparecen
+por el register renaming? ¿Cuáles no pueden eliminarse y deben respetarse?
+
+9. Para el código del ejercicio anterior, ejecutar el algoritmo de Tomasulo, durante los primeros 10 ciclos, indicando el estado de las RS y RAT. ARM32 tiene 16 registros. Asumir que se dispone de 5 RS (2 para instrucciones de load/store y 3 para instrucciones de enteros). Asumir que ADD/SUB demoran 1 ciclo, LDR 10 ciclos (miss en L1 y L2), STR 2 ciclos (escribe en el cache), y MUL 4 ciclos. Asumir una máquina superescalar de 2 vías.
+
+10. Si la instrucción LDR R1,[R2] genera un Page Fault, pero cuando esto ocurre, ya se ejecutaron las instrucciones MUL R1,R5,R6, y ADD R2,R1,R9. ¿Qué problema aparece en el estado del procesador?. ¿Cómo se conoce este escenario?. ¿Qué registros o memoria podrían haber sido modificados incorrectamente?
+
+11. ¿Qué bloque de hardware se agrega al modelo de Tomasulo para resolver la situación planteada en el ítem anterior?. Explicar su funcionamiento.
+
+Respuestas: 
+
+1.
+
+Para gestionar un Write Miss (fallo de escritura) bajo el protocolo MESI, las acciones dependen fundamentalmente del estado actual de la línea en la memoria caché cuando el Controlador Local detecta dicho evento a través del Snoop Bus. Como regla general de este protocolo (basado en write-invalidate), cada vez que se detecta un Write Miss en el bus para una línea presente en el caché local, esta copia se volverá obsoleta y deberá invalidarse, sin importar su estado actual.
+A continuación, se detallan los pasos, señales y estados resultantes según cada estado de la línea:
+
+- Estado Invalid (I)
+    Comportamiento de la CPU que origina el Write Miss: Si la CPU necesita escribir en una línea que no está en su caché o está en estado Invalid, su Controlador Caché propagará la señal de Write Miss en el bus.
+    Acciones: Como el procesador requiere escribir un dato básico dentro de la línea, primero debe conseguir y leer toda la línea desde la memoria principal (LLC/Memoria DRAM).
+    Estado final: Una vez que se recupera la línea completa y se realiza la escritura, esa línea pasa al estado Modified en el caché del procesador que originó el requerimiento. Los demás cachés que escuchen el bus simplemente ignoran la señal si ya tenían la línea como Invalid.
+
+- Estado Exclusive (E)
+    Detección en el Snoop Bus: El Controlador Caché local detecta que otro procesador ha emitido un Write Miss hacia una dirección que mapea en una de sus líneas que actualmente está en estado Exclusive.
+    Acciones y Estado Final: El controlador local simplemente invalida la línea completa de su propio caché. No requiere enviar datos al bus, ya que la copia en Exclusive coincide con la de la memoria principal. El estado final de la línea en este núcleo pasa a ser Invalid.
+
+- Estado Shared (S)
+    Detección en el Snoop Bus: Al igual que en el caso anterior, el Snoop Bus capta el Write Miss emitido por otro núcleo.
+    Acciones y Estado Final: El comportamiento es idéntico al del estado Exclusive: el Controlador Caché local invalida la línea. El estado final de la línea en todos los cachés remotos que la tenían compartida pasa a ser Invalid.
+
+- Estado Modified (M) 
+    Este es el caso más complejo porque la línea en este caché es la única válida en todo el sistema (está dirty) y la memoria principal está desactualizada.
+    Detección en el Snoop Bus: El Controlador local detecta un Write Miss para una dirección correspondiente a su línea en estado Modified. El controlador está obligado a actualizar el dato en la memoria mediante un Copy Back (escritura hacia atrás).
+    Señales y estado eléctrico del bus: El core local (el dueño de la línea) activa la señal RFO (Read For Ownership). Esta es una operación que asegura el acceso a un dato válido cuando este no está coherente en la jerarquía. Al activarse RFO, el core escritor (el que solicitó el Write Miss) debe suspender temporalmente su operación y poner sus buses en estado de alta impedancia (Hi-Z).
+    Acciones: Mientras los buses del core escritor están en Hi-Z, el core local ejecuta el Copy Back hacia la memoria. Esta actualización de los datos es captada directamente por el Snoop Bus del core escritor original.
+    Estado final: El core escritor lee el valor actualizado directamente desde el bus de datos, ejecuta su modificación en su propio caché y se convierte en el nuevo propietario de la línea, asignándole el estado Modified. Por su parte, el core local que entregó la línea termina el proceso cambiando el estado de su propia copia a Invalid
+    
+2.
+
+El protocolo MESIF introduce el estado Forward (F) como una forma especial del estado Shared (S). A continuación se responden cada uno de los puntos sobre este protocolo:
+Ventajas sobre el protocolo MESI La principal ventaja del protocolo MESIF es que optimiza el acceso al bus en sistemas con memoria distribuida.
+Funcionamiento El funcionamiento del protocolo se basa en asegurar que, entre todos los cachés que tienen una copia de una línea de memoria compartida (estado S), solo una de ellas tenga asignado el estado F. Este caché en estado F actúa como el único responsable de reenviar (forward) los datos a otros procesadores que los soliciten.
+Situación ante el desalojo de la línea en estado "F" y cómo se recupera En este protocolo, la invalidación o desalojo de una línea en estado F (al igual que en el estado S) no se informa al resto del sistema. Si el caché que contiene la línea en estado F la desaloja, la situación que se presenta es que el sistema se queda sin ninguna línea en estado F para esa dirección de memoria.
+El protocolo se recupera de esta situación haciendo que el próximo requerimiento (Read Miss) de esa línea sea resuelto directamente desde el nivel jerárquico de memoria inferior, lo cual conlleva la consecuente penalización en el rendimiento (performance).
+Para proteger al sistema y minimizar este efecto negativo, el protocolo MESIF asigna el estado F de forma dinámica mediante el criterio LRU (Least Recently Used): cada vez que el caché con el estado F resuelve un requerimiento y transmite los datos, este le cede el estado F a la línea del caché que acaba de terminar de leerla. De esta forma, el estado F siempre se mantiene en el caché que accedió al dato de forma más reciente, siendo el menos propenso a ser desalojado.
+
+3. 
+
+El principio de localidad (o localidad de referencia) es el concepto rector sobre el cual se basa la construcción de las jerarquías de memoria en un computador. Surge de la observación empírica de que los programas tienden a reutilizar datos e instrucciones recientemente utilizados, restringiendo sus accesos a un intervalo de direcciones contiguas durante un tiempo significativo.
+Este principio se divide en dos conceptos fundamentales:
+
+    Localidad temporal: Se refiere a un patrón de acceso repetitivo a las mismas direcciones de memoria en un intervalo temporal finito y acotado. Esto dictamina que existe una probabilidad muy alta de que la CPU vuelva a solicitar en el corto plazo exactamente las mismas direcciones que está usando en el presente. Un ejemplo típico de esto son las variables de control dentro de un bucle (i, j, contadores o acumuladores), las cuales se leen y escriben con altísima frecuencia durante la ejecución.
+    Localidad espacial: Se refiere a la tendencia del procesador a acceder a un espacio de direcciones vecinas o contiguas al objeto que está direccionando actualmente. Existe una probabilidad sumamente alta de requerir datos adyacentes y muy baja de acceder a direcciones lejanas. Esto se verifica al recorrer arreglos secuenciales en memoria (como vectores) o al ejecutar bloques de instrucciones que se suceden una tras otra.
+
+Importancia en la arquitectura: Comprender estos conceptos es vital para el rendimiento del computador. Gracias a la localidad temporal, si logramos mantener las variables y el código más utilizado en una memoria muy rápida (como el Caché), el tiempo de acceso será mínimo y óptimo.
+Por otro lado, la localidad espacial es la razón por la cual la memoria Caché no carga datos byte por byte. Cuando ocurre un fallo (miss), el controlador trae un bloque o "línea" entera de memoria a la vez, anticipando que los bytes vecinos serán solicitados por el procesador en los accesos subsiguientes
+
+4. 
+
+Para las memorias caché, existen dos políticas principales para llevar a cabo la escritura de datos, ya que esta operación implica alterar un valor que se encuentra replicado en los niveles inferiores de la jerarquía:
+
+- Write Through (Escritura directa)
+    Funcionamiento: El dato modificado por el procesador se escribe de forma simultánea tanto en la memoria Caché como en el nivel inferior de la jerarquía.
+    Ventajas (Pros): Tiene una implementación mucho más simple. Asegura la coherencia de datos en todo momento, ya que el siguiente nivel jerárquico menor siempre cuenta con una copia actualizada de la información. Esta característica favorece a los sistemas Multiprocesador y a los subsistemas de Entrada/Salida (E/S), como los controladores DMA.
+    Desventajas (Cons): Al tener que replicar cada escritura en los niveles inferiores, se demanda un uso intensivo del ancho de banda del bus del sistema. En sistemas Multiprocesador donde el bus es compartido, esto impacta negativamente en la performance por la competencia de acceso.
+
+- Write Back o Copy Back (Escritura aplazada)
+    Funcionamiento: El dato se escribe únicamente en la memoria caché local. Su actualización hacia el resto de la jerarquía de memoria (niveles inferiores) se pospone y solo ocurre cuando esa línea debe ser desalojada del caché. Para minimizar las actualizaciones innecesarias, cada línea utiliza un bit de estado que indica si está dirty (modificada) o clean (no modificada). Solo se realiza el write back hacia el nivel inferior si la línea a desalojar está dirty.
+    Ventajas (Pros): Permite que el procesador escriba a la máxima velocidad posible. Si una misma línea recibe múltiples escrituras sucesivas, solo se enviará el resultado final hacia el nivel inferior cuando las condiciones fuercen su desalojo. Esto reduce significativamente el requerimiento de ancho de banda del bus (vital en sistemas Multiprocesador) y minimiza el consumo de energía (muy atractivo en sistemas embebidos).
+    Desventajas (Cons): Exige una implementación más compleja que Write Through. Al quedar las copias de los niveles inferiores y de los cachés de otros núcleos de forma obsoleta, requiere el uso de protocolos adicionales para asegurar y manejar la coherencia de los datos en todo el sistema.
+
+Políticas ante un fallo de escritura (Write Miss) Las políticas de escritura también deben establecer cómo accionar si el procesador intenta escribir en una dirección que no está cargada actualmente en el caché (Write Miss):
+
+- Write Allocate: Procede de manera similar a un fallo de lectura; primero se trae la línea completa desde el nivel inferior de memoria hacia el caché, y una vez allí, se realiza la escritura sobre la misma.
+
+- No-Write Allocate: El dato se escribe directamente en el nivel inferior inmediato, sin afectar el caché actual. La línea recién se traerá al caché si en el futuro el procesador solicita leerla (Allocate)
+
+5.
+
+De acuerdo con las diapositivas, existen dos clases principales de protocolos para mantener la coherencia de caché en sistemas multiprocesador:
+
+- Protocolos Directory Based (Basados en Directorio)
+    Funcionamiento: El estado de las líneas de memoria se mantiene en un Directorio centralizado que es accesible de manera rápida por todos los núcleos (cores). Este directorio suele consistir en un área de caché externa a cada core.
+    Pros y Cons: Su desventaja central es que tiene graves problemas de escalabilidad. En sistemas de arquitectura moderna como los de Memoria Compartida Distribuida (DSM) compuestos por múltiples núcleos, pierde sentido su utilización. Al concentrar la información en un punto único de acceso serializado, la alta tasa de accesos a la memoria generada por todos los núcleos satura el directorio rápidamente, creando un enorme cuello de botella.
+
+- Protocolos Snoopy Based (Basados en Monitoreo/Espionaje)
+    Funcionamiento: En este modelo descentralizado, cada core mantiene el estado de sus propias líneas de caché de forma local. Para mantener la coherencia en todo el sistema, cada controlador "espía" (hace snoop) lo que hacen los demás procesadores. El "Snoop Bus" no es un bus específico y separado, sino un conjunto de líneas entrantes conectadas al controlador caché con las cuales éste monitorea las transacciones que circulan por el propio bus del sistema. Si un procesador requiere acceder a una dirección, los controladores remotos analizan el bus para determinar si tienen una copia de esa línea en su caché y si deben accionar para proteger la coherencia de los datos. Para llevar a cabo las acciones de coherencia, el protocolo Snoopy puede implementarse mediante políticas de write-invalidate (se garantiza el acceso exclusivo invalidando las copias de los demás cores antes de realizar la escritura local) o de write-update (se actualiza la modificación en todas las cachés que tengan la línea mediante un broadcast).
+    Pros y Cons: La principal ventaja de este protocolo es que es el más eficiente. Adicionalmente, implementar la variante write-invalidate resulta muy favorable porque ahorra una cantidad evidente de ancho de banda del bus a medida que crece el número de procesadores. Su gran desventaja es que es el modelo más complejo de implementar a nivel hardware, dada la necesidad constante de intercomunicar a todos los cores del sistema entre sí.
+
+6.
+
+La predicción de saltos es un conjunto de técnicas diseñadas para evitar o minimizar las penalizaciones (vaciado del pipeline) que se producen ante las discontinuidades en el flujo de ejecución (obstáculos de control).
+Los métodos e implementaciones presentados en las diapositivas se pueden dividir en dos grandes grupos: métodos estáticos (dependientes del compilador) y métodos dinámicos (implementados por el hardware del procesador).
+- Métodos Estáticos (Dependientes del compilador)
+En estos métodos el hardware interno no realiza ningún análisis del código ni tiene adaptatividad; dependen exclusivamente del diseño del set de instrucciones y de cómo el compilador organiza el código.
+    Predicted-non-taken: El procesador asume por defecto que el salto nunca se toma. Simplemente continúa buscando y procesando las instrucciones secuenciales siguientes como si el salto fuera una instrucción común. Es muy adecuado cuando el salto es "hacia adelante".
+    Predicted-taken: El procesador asume por defecto que el salto siempre se toma y continúa la búsqueda de instrucciones directamente a partir de la dirección de destino (target). Es sumamente útil y eficiente en estructuras de iteración o bucles, ya que solo falla cuando expira la condición del lazo.
+    Delayed branch (Salto demorado): Introducido en los primeros procesadores RISC. La instrucción sucesora secuencial se envía a un slot de salto demorado y se ejecuta siempre, sin importar el resultado de la evaluación del salto. Si la condición resulta en un salto (taken), la instrucción destino ya estará procesándose, ocultando la demora.
+    Loop Unrolling (Desenrollado de lazos): El compilador "desenrolla" iteraciones de un bucle para escribir sus instrucciones de forma secuencial, una detrás de la otra. La gran ventaja es que se eliminan físicamente los branches que componen el bucle, desapareciendo por completo la penalización.
+
+- Métodos Dinámicos (Especulación por Hardware)
+Corresponden a microarquitecturas más avanzadas, en las que el procesador analiza activamente el flujo de instrucciones y toma decisiones adaptativas basándose en el historial de ejecución.
+    Branch Prediction Buffer (BPB) de 1 bit: Es una tabla simple indexada por la dirección de memoria de la instrucción de salto. Contiene 1 bit que indica cuál fue el resultado de ese salto la última vez que se ejecutó (0 para Non-taken, 1 para Taken). Funciona como una "pista" para la Unidad de Ejecución. Su limitación principal es que, en un bucle típico, falla dos veces: cuando termina el bucle (el salto no se toma, invirtiendo el bit) y cuando vuelve a ejecutarse el mismo bucle en el futuro (asumirá erróneamente que no se toma).
+    Predicción de 2 bits: Mejora el caso anterior implementando una máquina de 4 estados para cada salto: Predicción Fuerte/Débil para Taken y Predicción Fuerte/Débil para Non-Taken. Con este método, una predicción fuerte debe fallar dos veces consecutivas para cambiar su suposición. Alcanza una eficiencia muy alta (superior al 82% en general) y suele implementarse en la etapa de Instruction Fetch, ya sea como una pequeña caché o agregando los bits directamente a las líneas de la caché de instrucciones. Aumentar a más de 2 bits no compensa la complejidad en hardware porque no trae mejoras funcionales significativas.
+    Branch Target Buffer (BTB): Es una memoria caché de acceso por contenido que almacena el par: dirección de la instrucción de salto y la dirección target (de destino) ya resuelta de la última vez que se ejecutó. Se accede utilizando el Program Counter completo.
+        Si la dirección se encuentra en el BTB, el procesador asume que el salto se tomará y aplica inmediatamente la dirección destino almacenada para seguir buscando instrucciones sin penalidad.
+        Si la dirección no está en el BTB, asume que el salto no se toma (non-taken). Si resulta que finalmente el salto sí debía tomarse (taken), asume el retraso correspondiente en el pipeline y guarda la nueva dirección de destino en el BTB para usarla en el futuro
+        
+8.
+
+Riesgos presentes en el código: Al analizar la secuencia de instrucciones, se identifican los siguientes riesgos (hazards):
+
+    RAW (Read After Write - Dependencias Verdaderas): Ocurren cuando una instrucción necesita leer un registro en el que una instrucción anterior debe escribir su resultado.
+        I1 a I2 por R1.
+        I3 a I6 por R1.
+        I2 a I4 por R3.
+        I4 a I5 por R4.
+    WAR (Write After Read - Antidependencias): Ocurren cuando una instrucción escribe en un registro después de que una instrucción previa lo haya leído.
+        I2 a I3 por R1.
+        I2 a I4 por R4.
+        I1 a I6 por R2.
+    WAW (Write After Write - Dependencia de salida): Ocurren cuando dos instrucciones escriben en el mismo registro.
+        I1 a I3 por R1.
+
+¿Qué dependencias desaparecen por el register renaming y cuáles deben respetarse?
+
+    Desaparecen: Las dependencias falsas WAR y WAW desaparecen por completo gracias a la técnica de Register Renaming (renombramiento de registros) implementada por el algoritmo de Tomasulo. Al utilizar las Estaciones de Reserva (RS) y la Register Alias Table (RAT), el hardware asigna una etiqueta ("tag") temporal a los resultados. Esto asegura que la sobreescritura de un registro de arquitectura (como R1 o R4) no destruya la copia antigua que una instrucción previa aún necesita utilizar, ya que los consumidores anteriores seguirán apuntando al tag correcto de la RS que lo generó originalmente.
+    Deben respetarse: Los riesgos RAW son dependencias verdaderas de datos y no pueden eliminarse. El procesador debe asegurar la lógica del algoritmo original forzando a las instrucciones dependientes a esperar en sus respectivas RS hasta que la instrucción que produce el dato finalice y publique su resultado en el bus común de datos (CDB)
+    
+ 9.
+ 
+ Para el desarrollo del algoritmo, se asume que la máquina superescalar de 2 vías despacha hasta 2 instrucciones por ciclo, que el inicio de ejecución ocurre al ciclo siguiente de estar disponibles los operandos, y que la publicación de resultados (Write Result en el CDB) toma 1 ciclo adicional al finalizar la ejecución.
+Trazado de los primeros 10 ciclos:
+
+    Ciclo 1:
+        Dispatch: Entran I1 (LDR) a la RS Ld1 e I2 (ADD) a la RS Int1.
+        RAT: Se actualiza apuntando R1 a Ld1 y R3 a Int1.
+    Ciclo 2:
+        Dispatch: Entran I3 (MUL) a la RS Int2 e I4 (SUB) a la RS Int3.
+        Ejecución: I1 inicia ejecución en Ld1 (ciclo 1/10).
+        RAT: R1 se reescribe apuntando a Int2 (resolviendo así la dependencia WAW) y R4 apunta a Int3 (resolviendo WAR).
+    Ciclo 3:
+        Dispatch: Entra I5 (STR) a la RS Ld2. La instrucción I6 (ADD) sufre un obstáculo estructural (Stall), ya que las 3 RS de enteros (Int1, Int2, Int3) están ocupadas.
+        Ejecución: I1 avanza (2/10). Como los operandos originales de R5 y R6 ya están disponibles, I3 inicia ejecución (1/4).
+    Ciclos 4 a 6:
+        Dispatch: I6 sigue en Stall esperando una RS de enteros libre.
+        Ejecución: I1 avanza (3/10 al 5/10). I3 avanza y finaliza su ejecución matemática en el ciclo 6 (4/4).
+    Ciclo 7:
+        Write Result: I3 publica su resultado (para R1) en el CDB. Esto libera la RS Int2. RAT[R1] captura el valor y marca el bit Válido=1.
+        Ejecución: I1 avanza (6/10).
+    Ciclo 8:
+        Dispatch: Con Int2 liberada, la atascada I6 (ADD) logra entrar a Int2, leyendo el valor recién generado de R1. RAT actualiza R2 apuntando a Int2.
+        Ejecución: I1 avanza (7/10).
+    Ciclo 9:
+        Ejecución: I1 avanza (8/10). I6 inicia ejecución (1/1) y la finaliza en este mismo ciclo ya que la suma demora 1 ciclo.
+    Ciclo 10:
+        Write Result: I6 publica su resultado (para R2) en el CDB. RS Int2 se libera nuevamente. RAT[R2] captura el valor y marca Válido=1.
+        Ejecución: I1 avanza (9/10).
+
+Estado al final del Ciclo 10:
+Register Alias Table (RAT):
+
+    R0, R5-R15: Válidos (conservan sus valores de estado base).
+    R1: Válido (posee el resultado final provisto por I3 MUL en el ciclo 7).
+    R2: Válido (posee el resultado final provisto por I6 ADD en el ciclo 10).
+    R3: Inválido / Tag = Int1 (A la espera de que la instrucción I2 se destrabe y termine).
+    R4: Inválido / Tag = Int3 (A la espera de que la instrucción I4 se destrabe y termine).
+
+Reservation Stations (RS):
+
+    Ld1: Ocupada. (Op = LDR). Está ejecutando la carga de memoria (Ciclo 9/10).
+    Ld2: Ocupada. (Op = STR). Está detenida en espera. (Qj = Int3 por R4, Vk = Val(R8)).
+    Int1: Ocupada. (Op = ADD). Está detenida en espera. (Qj = Ld1 por R1, Vk = Val(R4)).
+    Int2: Libre. (Se desocupó tras publicar el resultado de I6 en el ciclo 10).
+    Int3: Ocupada. (Op = SUB). Está detenida en espera. (Qj = Int1 por R3, Vk = Val(R7)).
+    
+10.
+
+Problema en el estado del procesador Cuando la instrucción LDR R1, [R2] genera una excepción (como un Page Fault), el comportamiento habitual es vaciar (flushear) el pipeline para vectorizar y ejecutar la rutina de manejo de la excepción. El problema radica en que, debido a la ejecución fuera de orden, las instrucciones posteriores (MUL y ADD) ya han finalizado prematuramente y han alterado el estado arquitectural de la máquina. Esto provoca que el estado del procesador sea incompatible con una correcta gestión de la excepción. Al finalizar el handler e intentar regresar a la instrucción que provocó el fallo para reintentarla, el contexto original del programa ya se encuentra corrompido.
+Nombre del escenario Este escenario se conoce como Excepciones Imprecisas (Imprecise Exceptions), un efecto que la literatura describe como "devastador" para la correcta ejecución del código. Para solucionar esto en las arquitecturas modernas y mantener el orden del programa, se implementan estructuras como el ReOrder Buffer (ROB), que obligan a que la publicación (commit) de los resultados se realice estrictamente en orden, reteniendo las excepciones hasta que las instrucciones previas se hayan completado.
+Registros o memoria modificados incorrectamente Basado en las instrucciones que lograron ejecutarse (MUL R1, R5, R6 y ADD R2, R1, R9), los registros arquitecturales modificados incorrectamente serían:
+
+    Registro R1: Sobreescrito por el resultado de la instrucción MUL.
+    Registro R2: Sobreescrito por el resultado de la instrucción ADD.
+
+La modificación de R2 es crítica y fatal para la ejecución del programa. Como la instrucción que generó el Page Fault es LDR R1, [R2], el procesador intentará volver a ejecutarla luego de resolver el fallo en memoria. Sin embargo, como el registro R2 ya fue modificado por la suma, el procesador leerá una dirección de memoria completamente distinta y errónea, alterando los resultados lógicos sin posibilidad de recuperación.
+
+11.
+
+El bloque de hardware que se agrega al modelo de Tomasulo para resolver el problema de las excepciones imprecisas es el ReOrder Buffer (ROB).
+Su función principal es garantizar que el retiro o publicación de los resultados finales (commit) se realice estrictamente en orden, respetando la secuencia lógica prevista en el programa original, sin importar que las instrucciones se hayan ejecutado fuera de orden.
+Funcionamiento: A diferencia del algoritmo de Tomasulo clásico, que escribía los resultados directamente en los registros arquitecturales ni bien se completaba la operación, el ROB introduce un paso intermedio donde los resultados se retienen temporalmente y no se aplican inmediatamente. Su funcionamiento se detalla a continuación:
+
+    Estructura y Asignación: Al igual que las Estaciones de Reserva, el ROB agrega una serie de registros internos (slots) donde se almacenan los resultados de las instrucciones que se ejecutan especulativamente. A cada instrucción despachada se le asigna un slot en el ROB y su entrada guarda datos vitales: el tipo de instrucción, el destino (el registro arquitectural o la dirección de memoria a modificar), el valor (resultado) de la operación, y un estado de "Ready" (listo) que indica si el resultado ya está disponible.
+    Write Result (Escritura de Resultados): A medida que las Unidades de Ejecución finalizan sus cálculos fuera de orden, publican sus resultados a través del bus común. Estos valores se escriben temporalmente en el slot correspondiente dentro del ROB. El resultado permanecerá almacenado allí desde que se obtiene hasta el momento del commit.
+    Commit (Retiro en Orden): Es la fase final de completamiento de la instrucción. La Unidad de Retiro monitorea el ROB y retira las instrucciones estrictamente en el orden del programa. Si la instrucción más antigua en la cola del ROB ya terminó su ejecución (está Ready) y lo hizo correctamente, el valor almacenado en el ROB finalmente se copia de manera permanente en el operando destino real de la arquitectura.
+    Manejo de Excepciones: Si la instrucción que está a punto de hacer commit generó una excepción (como el Page Fault del ítem anterior) o corresponde a un salto cuya condición se predijo mal, el procesador vacía (flushea) las entradas del ROB. Gracias a que las instrucciones problemáticas o ejecutadas prematuramente solo habían guardado sus resultados en el ROB y no en los registros reales, la máquina mantiene su estado original seguro e inalterado, lista para gestionar la excepción o ejecutar el código correcto.

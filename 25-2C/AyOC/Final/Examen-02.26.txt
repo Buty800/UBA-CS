@@ -1,0 +1,201 @@
+Preguntas:
+
+1. La diferencia entre un protocolo MSI y un protocolo MESI es el agregado del estado Exclusive. Explicar
+detalladamente qué uso tiene el nuevo estado, ¿Para que se utiliza? y ¿Qué ventajas ofrece sobre no tener
+este estado?
+2. La señal Shared es parte de los sistemas de caché. Explicar ¿Cuál es su rol?, ¿Quien la activa?, ¿Para que se
+utiliza? y dar un ejemplo práctico de su funcionamiento. Además, explicar cómo funciona eléctricamente
+en un sistema con más de dos cores.
+3. Explicar la diferencia entre un sistema UMA (Uniform Memory Access) y un sistema DSM (Distributed
+Shared Memory). ¿Qué ventajas tiene un sistema sobre el otro?
+4. Explicar cómo funciona una “Content Addressable Memory”. Indicar su estructura y dar un ejemplo de
+funcionamiento. En qué contextos se utiliza, es decir para implementar que partes de un procesador.
+5. En una cache de mapeo directo: ¿Cuáles son las posibles políticas de reemplazo que pueden ser imple-
+mentadas?
+6. A que hace referencia el concepto de “branch penalty”. Explique que quiere decir, dando un ejemplo
+detallado. Existe alguna técnica que permita reducir a cero la probabilidad de tener penalidad en los
+saltos. Justifique su respuesta.
+7. En el algoritmo de Tomasulo: ¿Es posible llegar a un estado en que todas las entradas de la RAT sean
+inválidas y todas las RS estén ocupadas? Si es posible, explicar como se puede dar este caso, mostrando
+el estado de la RAT y las RS.
+8. Considerar el siguiente código:
+1 LDR R1, [R4]
+2 ADD R8, R4, R2
+3 SUB R8, R1
+4 LOAD R1, [R8]
+9. Identificar qué riesgos están presentes en el código: RAW, WAW y WAR.
+10. Considerando el código del ejercicio anterior. Ejecutar el algoritmo de Tomasulo, suponiendo un RF de
+16 registros y 5 RS. Donde 2 son para instrucciones de load/store y 3 son para instrucciones de enteros.
+11. Determinar si la siguiente afirmación es verdadera y justificar con un ejemplo o contra ejemplo: “En un procesador superscalar los obstáculos estructurales y de datos quedan más expuestos.” Justificar detalladamente su respuesta. 
+
+Respuestas:
+
+1. 
+
+El estado Exclusive (Exclusivo) indica que una línea de caché está presente únicamente en esa caché local y que su contenido coincide exactamente con la copia en la memoria principal (es decir, está limpia o "clean"). Cuando el controlador de caché lee una línea desde la memoria principal (debido a un fallo de lectura) y verifica mediante el bus que ningún otro caché la tiene, asume la propiedad total de la línea (ownership) y la coloca en este estado.
+Uso y ventajas sobre un protocolo MSI (que carece de este estado):
+
+    Disminuye drásticamente la actividad y congestión en el bus del sistema: La ventaja fundamental del estado Exclusive es que permite a un procesador escribir en la línea sin tener que generar y propagar señales de invalidación en el bus. En un protocolo MSI tradicional, una línea limpia se encontraría en estado "Shared" (Compartido). Si el procesador quisiera escribir en ella, tendría que asumir que otros cachés podrían tenerla y estaría obligado a mandar una invalidación por el bus antes de escribir. Con el estado Exclusive, el procesador ya sabe que es el único dueño y se ahorra ese paso.
+    Mejora la velocidad de escritura local: Si el procesador necesita modificar una línea que se encuentra en estado Exclusive, la operación se resuelve localmente: la línea simplemente cambia al estado Modified y la escritura se realiza sin notificar al resto de los controladores.
+    Independencia de operaciones: Una vez que la línea adopta el estado Exclusive, todos los requerimientos de lectura y escritura generados por la CPU local se satisfacen directamente desde esa caché, sin generar ningún tipo de penalización ni tráfico adicional en el bus.
+    Precisión de propiedad (Ownership): A diferencia del estado Shared, que es impreciso porque un caché no tiene forma de saber cuántos otros cachés comparten la misma línea (o si la han descartado silenciosamente), el estado Exclusive es un estado preciso que asegura de forma garantizada el "ownership" único de esa copia en todo el sistema
+    
+2.
+
+La señal Shared es un mecanismo fundamental en los protocolos de coherencia de caché (como MESI o MOESI) para sistemas multiprocesador. A continuación, se detalla su funcionamiento basado en las fuentes provistas:
+
+    ¿Cuál es su rol? Su rol principal es informar a un procesador que está intentando leer una línea de memoria que esa misma línea ya existe en la memoria caché de otro procesador del sistema.
+    ¿Quién la activa? Es activada por el Controlador de Caché remoto. Cada controlador de caché posee un Snoop Bus con el cual "espía" las transacciones en el bus del sistema. Si un controlador detecta una petición de lectura (Read Miss) de una línea que él ya tiene almacenada, es su responsabilidad asegurar la coherencia y, por lo tanto, activa la señal Shared.
+    ¿Para qué se utiliza? Se utiliza para advertir al procesador lector que no puede asumir la propiedad exclusiva (ownership) de la línea solicitada. Al detectar esta señal activa, el controlador de caché que originó la lectura sabe que debe almacenar la nueva línea en el estado Shared (en lugar del estado Exclusive), indicando que la propiedad será compartida.
+    Ejemplo práctico de su funcionamiento: Imagina que el Core A tiene una línea de memoria almacenada en su caché en estado Exclusive.
+        Luego, el Core B necesita leer un dato de esa misma línea, pero no la tiene en su caché, lo que genera un Read Miss que se propaga por el bus del sistema.
+        El Controlador de Caché del Core A detecta esta transacción de lectura a través de su Snoop Bus.
+        Al darse cuenta de que posee la línea, el Core A cambia el estado de su línea a Shared y activa la señal Shared en el bus.
+        El Core B recibe la línea desde el nivel de memoria inferior y, al ver la señal Shared activa en el bus, la guarda en su propia caché en estado Shared.
+    Funcionamiento eléctrico en un sistema con más de dos cores: Cuando un procesador sufre un fallo de lectura y accede al bus, no tiene forma de saber a priori si hay una copia (o cuántas) en los demás cachés del sistema. Por esto se emplea una única línea física de bus llamada Shared que es compartida por todos los controladores. El principio de funcionamiento eléctrico en el bus radica en que todos los controladores remotos evalúan la petición simultáneamente y "si al menos uno tiene esa línea activará la señal Shared". Esto significa que no importa si la línea está en un solo caché o en varios (por ejemplo, tres cores distintos teniéndola en estado Shared); todos los que la posean intentarán activar la misma línea al mismo tiempo, y basta con que al menos uno logre afirmarla para que el procesador lector reciba la advertencia de que la línea es compartida.
+    
+    
+3. 
+
+La diferencia fundamental radica en cómo los núcleos (cores) experimentan el tiempo de retardo o latencia al acceder a la memoria principal:
+
+    Sistema UMA (Uniform Memory Access): Característico de los sistemas SMP (Multiprocesamiento Simétrico), se define porque todos los cores tienen la misma latencia para acceder a la memoria, aun cuando esta se organice en varios niveles o bancos. El tiempo de acceso es uniforme para cualquier procesador hacia cualquier ubicación de memoria.
+    Sistema DSM (Distributed Shared Memory): La memoria no está centralizada, sino que se encuentra distribuida por grupos de cores. Cada grupo puede acceder a su memoria local y también a la memoria del resto de los grupos mediante una red de interconexión. Esto genera un acceso de tipo No Uniforme (NUMA), ya que la latencia dependerá directamente de dónde esté ubicado el ítem que se desea acceder (acceder a la memoria local es más rápido que acceder a la porción de memoria de otro grupo).
+
+Ventajas de un sistema sobre el otro:
+La gran ventaja del modelo DSM sobre el UMA aparece cuando el sistema necesita escalar. A medida que la cantidad de cores aumenta, el modelo UMA (SMP) exige cada vez más ancho de banda de la memoria DRAM centralizada; si la memoria no puede proveerlo, la latencia de acceso general aumenta drásticamente y se vuelve inviable.
+Por su parte, el esquema DSM resuelve este cuello de botella central asegurando baja latencia y suficiente ancho de banda en la memoria local de cada core. Aunque DSM requiere lidiar con la complejidad de tiempos de acceso no uniformes para posiciones remotas, tiene la inmensa ventaja de ser una arquitectura mucho más sostenible y eficiente para sistemas con una gran cantidad de procesadores
+
+4.
+
+Una Content Addressable Memory (CAM) o Memoria de Acceso por Contenido es un tipo de memoria en donde el acceso no se realiza a través de una dirección fija, sino mediante el contenido o una etiqueta ("Tag") asociada a cada registro.
+Estructura: A diferencia de un archivo de registros tradicional (Register File) en donde basta poner una dirección para obtener el contenido a la salida, la estructura de la CAM requiere acoplar los registros a una Matching Unit (Unidad de Comparación). A cada registro de la memoria se le asigna un "Tag" identificatorio en lugar de una dirección.
+Ejemplo de funcionamiento: Cuando el sistema requiere buscar un dato, introduce una etiqueta de entrada (key_in). La Matching Unit se encarga de comparar esta etiqueta ingresada de forma simultánea (en paralelo) contra todas y cada una de las etiquetas almacenadas en la CAM.
+
+    Si encuentra una coincidencia, la salida de la comparación se vuelve TRUE y la memoria devuelve el contenido de la palabra o registro asociado a ese Tag.
+    Si la etiqueta buscada no se encuentra entre los registros de la CAM, la unidad genera inmediatamente una señal de fallo o MISS.
+
+Contextos de uso en un procesador: Debido a su inmensa velocidad para buscar datos en paralelo, las CAM se utilizan típicamente para implementar dos partes fundamentales de la microarquitectura de un procesador moderno:
+
+    Directorio de Caché (Cache Directory): Se emplea en el Controlador de Caché para determinar rápidamente si una línea de memoria que pide la CPU está o no en la memoria Caché. La etiqueta ingresada es la dirección que busca el procesador, y la CAM determina si hay un Hit (coincidencia) o un Miss.
+    Branch Target Buffer (BTB): Se utiliza dentro de las unidades de predicción dinámica de saltos. El BTB es una caché que almacena las direcciones de destino de saltos previos y se accede enviándole como etiqueta el valor completo del Program Counter (PC) de la instrucción actual. Si el PC se encuentra en la CAM (coincidencia), el procesador obtiene la dirección de salto destino (target) ya resuelta la vez anterior. Si el valor no se encuentra, se asume un Miss y el salto se toma por defecto dependiendo de la lógica de predicción
+    
+    
+5. 
+
+En una caché de mapeo directo (Direct Mapped), no se implementa ninguna política de reemplazo (como LRU, FIFO o Random).
+Esto se debe a que una caché de mapeo directo funciona, en esencia, como una caché asociativa por conjuntos de una sola vía (n=1). En este esquema, que es el método de ubicación más restrictivo, cada línea de la memoria principal tiene una única ubicación posible en la memoria caché, la cual queda predeterminada directamente por el hardware mediante la operación (Line Frame Address) mód (Cache #Lines).
+Como resultado de esta arquitectura, cuando el procesador requiere un dato que no está en la caché y se genera un Conflict Miss, la nueva línea leída desde la memoria debe sobreescribir de manera obligatoria a la línea que actualmente ocupa esa posición preasignada.
+A diferencia de las cachés Fully Associative o Set Associative, donde un bloque de memoria puede ubicarse en múltiples líneas o vías y se requiere un algoritmo para elegir cuál desalojar, en el mapeo directo no existen opciones alternativas para ubicar la línea. Al haber un solo destino predeterminado, el controlador de caché no tiene que tomar ninguna decisión de desalojo y, por lo tanto, no se requiere ni se aplica ninguna política de reemplazo
+
+6. 
+
+El concepto de "branch penalty" (o penalización de salto) hace referencia a la pérdida de rendimiento y de ciclos de reloj que sufre un procesador segmentado (pipeline) cuando se encuentra con una discontinuidad en el flujo de ejecución. Debido a que el pipeline busca instrucciones de forma secuencial, al procesar un salto, todo el código que fue pre-procesado erróneamente debe descartarse y el pipeline debe vaciarse. Como consecuencia de esto, el sistema demorará n−1 ciclos de reloj adicionales (siendo n el número de etapas del pipeline) hasta poder entregar el primer resultado válido, situación bautizada como "la conspiración de los branches".
+Ejemplo detallado: El peor escenario ocurre con los saltos condicionales, debido a que el procesador no sabe si el salto se tomará (condición True) o no (condición False) hasta que la instrucción alcanza la fase de ejecución. Imagina un procesador leyendo secuencialmente las instrucciones 1, 2, 3, una instrucción de salto (JMP) y las sucesoras secuenciales 4 y 5.
+
+    La instrucción JMP avanza por las etapas de decodificación y lectura de operandos, mientras el procesador, asumiendo el flujo secuencial, ya introdujo en el pipeline a las instrucciones 4 y 5.
+    Cuando el JMP llega finalmente a la fase de ejecución, se determina que la condición es True (lo que se conoce como branch taken).
+    El Program Counter (PC) cambia a la nueva dirección de salto (por ejemplo, hacia la instrucción 7).
+    En ese momento, las instrucciones 4 y 5 que ya estaban pre-procesándose en el cauce son información incorrecta y deben ser descartadas por completo, vaciando el pipeline.
+    El procesador comienza a buscar desde la instrucción 7 en adelante, experimentando la "branch penalty", ya que ningún resultado nuevo saldrá del pipeline hasta que la instrucción 7 atraviese todas las etapas desde cero.
+
+Técnica para reducir la penalidad a cero: Sí, existe una técnica que permite reducir la probabilidad de penalidad a cero y es el Loop Unrolling (o desenrollado de bucles), la cual es aplicada por el compilador.
+Justificación: Para aplicar esta técnica es necesario que los datos procesados dentro de un bucle sean paralelizables. El Loop Unrolling consiste en reescribir el código para deshacer la estructura del bucle y colocar las operaciones de forma lineal, una instrucción detrás de la otra. Al hacer esto, se eliminan físicamente las instrucciones de salto (branches) que armaban el bucle, y al desaparecer la instrucción de salto, la penalización desaparece por completo, logrando que el pipeline mantenga su flujo secuencial ininterrumpido
+
+7.
+
+Sí, es perfectamente posible llegar a un estado donde todas las entradas de la Register Alias Table (RAT) sean inválidas y, simultáneamente, todas las Reservation Stations (RS) estén ocupadas.
+¿Cómo se puede dar este caso? La mecánica central del algoritmo de Tomasulo dicta que, cada vez que la Unidad de Decodificación envía una instrucción, esta ocupa un registro en la RS. En ese mismo momento, al registro de la RAT que corresponde al operando destino de esa instrucción se le establece el bit Válido = 0 (inválido), y en su campo Tag se anota el número de entrada de la RS en el que se almacenó la instrucción.
+Para llegar al caso extremo planteado, se debe dar la siguiente secuencia de eventos:
+
+    Instrucciones de larga duración: Se envían a ejecución una o varias instrucciones que demoran muchos ciclos de reloj en completarse, como por ejemplo divisiones (sdiv) o lecturas a memoria que sufren un Cache Miss (ldr con fallo en L1). Estas instrucciones ocupan sus respectivas entradas en la RS y quedan allí esperando completarse.
+    Invalidación total de la RAT: Dado que la ejecución es Fuera de Orden (OOO), la unidad de despacho sigue enviando las instrucciones siguientes del programa. Si esta secuencia de código contiene instrucciones que escriben resultados en todos los registros arquitecturales disponibles (por ejemplo, de R0 a R15), el algoritmo irá marcando secuencialmente cada entrada de la RAT con Válido = 0, actualizando sus Tags para apuntar a las nuevas RS asignadas. Al abarcar todos los registros, la RAT entera quedará inválida.
+    Saturación de las RS: En el diseño de estos procesadores, la cantidad de entradas en las RS (n) es muy superior a la cantidad de registros de la arquitectura. Como las primeras instrucciones están atascadas demorando el flujo, las siguientes instrucciones continúan entrando a las RS en espera de que sus operandos estén listos ("Ready") o que se liberen Unidades Funcionales.
+    Sobreescritura de Tags (Riesgo WAW): Si durante este atasco ingresan más instrucciones que vuelven a tener como destino a registros que ya están inválidos, la RAT simplemente "pisa" el Tag existente con el de la nueva entrada de la RS, asegurando que la RAT siempre mantenga el último Tag para resolver correctamente el riesgo WAW (Write After Write). Las RS no pisan sus tags ni descartan instrucciones previas; estas simplemente se acumulan conservando sus dependencias.
+    Finalmente, las instrucciones continuarán acumulándose hasta llenar el 100% de las entradas de las Reservation Stations, momento en el cual se produce un obstáculo estructural (falta de RS disponibles) y el envío de nuevas instrucciones se paraliza (pipeline stall).
+
+Estado de las estructuras en este escenario:
+Estado de la RAT (Register Alias Table): Se mostrará completamente inválida, donde cada registro arquitectónico apunta a la última RS que planea escribir en él.
+
+    R0  -> Valor: -, Válido: 0, Tag: RS_08
+    R1  -> Valor: -, Válido: 0, Tag: RS_14
+    R2  -> Valor: -, Válido: 0, Tag: RS_02
+    ...
+    R15 -> Valor: -, Válido: 0, Tag: RS_25
+
+Estado de las RS (Reservation Stations): Se mostrarán completamente llenas, es decir, de la entrada 0 a la n, todas tendrán instrucciones en curso sin poder retirarse.
+
+    RS_00: Opcode: LDR | Tag/Valor_Op1: ... | Tag/Valor_Op2: ... | Control/Busy: Ocupado (Esperando dato de RAM por Cache Miss).
+    RS_01: Opcode: ADD | Tag/Valor_Op1: RS_00 | Tag/Valor_Op2: ... | Control/Busy: Ocupado (Esperando que RS_00 termine).
+    RS_02: Opcode: SDIV| Tag/Valor_Op1: ... | Tag/Valor_Op2: ... | Control/Busy: Ocupado (En ejecución, demora muchos ciclos).
+    ...
+    RS_n:  Opcode: SUB | Tag/Valor_Op1: RS_14 | Tag/Valor_Op2: ... | Control/Busy: Ocupado (A la espera de operandos por dependencias en cadena).
+    
+9. 
+
+Riesgos presentes en el código (RAW, WAW y WAR)
+Cuando un procesador ejecuta instrucciones fuera de orden, surgen riesgos por dependencias de datos que pueden alterar el comportamiento esperado del programa. Analizando las instrucciones:
+
+    LDR R1, [R4] (Escribe R1, Lee R4)
+    ADD R8, R4, R2 (Escribe R8, Lee R4, R2)
+    SUB R8, R1 (Escribe R8, Lee R8, R1)
+    LOAD R1, [R8] (Escribe R1, Lee R8)
+
+Riesgos RAW (Read After Write - Dependencias verdaderas) Aparecen cuando una instrucción necesita leer un registro que una instrucción previa aún no terminó de escribir.
+
+    RAW en R1 (Instrucciones 1 y 3): La instrucción 3 necesita leer R1, pero debe esperar a que la instrucción 1 termine de cargar el dato desde la memoria y lo escriba en R1.
+    RAW en R8 (Instrucciones 2 y 3): La instrucción 3 necesita leer R8, pero debe esperar al resultado de la suma de la instrucción 2.
+    RAW en R8 (Instrucciones 3 y 4): La instrucción 4 necesita usar R8 como dirección base de memoria, pero debe esperar al resultado de la resta de la instrucción 3.
+
+Riesgos WAW (Write After Write - Antidependencias de salida) Ocurren cuando dos instrucciones escriben en el mismo registro destino. Si se ejecutan fuera de orden, se corre el riesgo de que la instrucción más antigua sobreescriba el resultado de la más nueva, dejando un estado incorrecto.
+
+    WAW en R8 (Instrucciones 2 y 3): Ambas escriben en R8.
+    WAW en R1 (Instrucciones 1 y 4): Ambas cargan un dato desde memoria y lo escriben en R1.
+
+Riesgos WAR (Write After Read - Antidependencias) Ocurren cuando una instrucción escribe un registro que una instrucción previa necesita leer. Si la escritura se adelanta, la instrucción previa leerá un dato alterado.
+
+    WAR en R1 (Instrucciones 3 y 4): La instrucción 4 va a sobreescribir R1. Si se adelanta y lo escribe antes de que la instrucción 3 logre leer el valor original de R1 (el que trajo la instrucción 1), la resta se hará con datos incorrectos.
+
+10. 
+
+Ejecución del Algoritmo de Tomasulo
+El algoritmo de Tomasulo resuelve dinámicamente estos riesgos mediante Register Renaming (renombrado de registros), utilizando una Register Alias Table (RAT) para los registros arquitectónicos (R0 a R15) y Reservation Stations (RS) para esperar por los operandos.
+Dado un RF de 16 registros y 5 RS (2 para Load/Store: RS_LS1, RS_LS2; y 3 para Enteros: RS_Int1, RS_Int2, RS_Int3), simulamos el despacho de las 4 instrucciones asumiendo que ninguna ha terminado su ejecución aún para poder ver cómo se enlazan:
+Paso a paso del despacho:
+
+    LDR R1, [R4]: Se asigna a RS_LS1. Lee el valor válido de R4 de la RAT. El registro R1 en la RAT se marca como inválido y su etiqueta (Tag) pasa a apuntar a RS_LS1.
+    ADD R8, R4, R2: Se asigna a RS_Int1. Lee los valores válidos de R4 y R2. El registro R8 en la RAT se marca como inválido y su Tag pasa a ser RS_Int1.
+    SUB R8, R1: Se asigna a RS_Int2. Al buscar sus operandos, ve que R8 está inválido (Tag=RS_Int1) y R1 está inválido (Tag=RS_LS1). Anota ambos tags para esperar los datos en el Common Data Bus. Como su destino es R8, pisa el Tag existente en la RAT para R8, actualizándolo a RS_Int2. (Aquí resolvió el riesgo WAW de R8).
+    LOAD R1, [R8]: Se asigna a RS_LS2. Al buscar R8, ve que está inválido y anota su Tag actual (RS_Int2). Como su destino es R1, pisa el Tag existente en la RAT para R1, actualizándolo a RS_LS2. (Aquí resolvió el riesgo WAW de R1).
+
+Estado final de las estructuras (Snapshot tras despachar el código):
+Register Alias Table (RAT) (Solo se muestran los registros afectados, el resto tienen Válido=1):
+
+    R1: Valor = -, Válido = 0, Tag = RS_LS2
+    R8: Valor = -, Válido = 0, Tag = RS_Int2
+    R2, R4: Valor = Val(Rx), Válido = 1, Tag = -
+
+Reservation Stations (RS):
+
+    RS_LS1 (Ocupado = 1) | Opcode = LDR  | Op1_Val = Val(R4) | Op1_Tag = -       | Op2_Val = -       | Op2_Tag = -
+    RS_LS2 (Ocupado = 1) | Opcode = LOAD | Op1_Val = -       | Op1_Tag = RS_Int2 | Op2_Val = -       | Op2_Tag = -
+    RS_Int1 (Ocupado = 1) | Opcode = ADD  | Op1_Val = Val(R4) | Op1_Tag = -       | Op2_Val = Val(R2) | Op2_Tag = -
+    RS_Int2 (Ocupado = 1) | Opcode = SUB  | Op1_Val = -       | Op1_Tag = RS_Int1 | Op2_Val = -       | Op2_Tag = RS_LS1
+    RS_Int3 (Ocupado = 0) | Opcode = -    | Op1_Val = -       | Op1_Tag = -       | Op2_Val = -       | Op2_Tag = -
+
+Conclusión del hardware: Con este estado, el algoritmo resolvió exitosamente las antidependencias sin penalizar el pipeline. El riesgo WAR en R1 no causa problemas porque la instrucción 3 anotó para sí misma que debe escuchar la etiqueta RS_LS1 en el bus (el valor de I1), por lo que sin importar qué tan rápido la instrucción 4 (RS_LS2) traiga el nuevo valor de la RAM, la instrucción 3 solo tomará la salida que le corresponde y los riesgos quedan mitigados.
+
+11.
+
+La afirmación es verdadera.
+En un procesador superscalar, el objetivo es ejecutar más de una instrucción por ciclo de reloj utilizando múltiples cauces (pipelines) en paralelo. Al aumentar el paralelismo, los riesgos y conflictos de ejecución se multiplican:
+
+    Obstáculos estructurales: Quedan mucho más expuestos porque los recursos físicos del hardware se estresan al límite. En un procesador de un solo cauce, una etapa debe cuidarse de no chocar con las otras etapas de su propio pipeline. En un superscalar, cada etapa además de lidiar con las otras etapas de su propio pipeline, tiene que competir en simultáneo por los recursos contra las mismas etapas de los otros pipelines paralelos. Por lo tanto, la probabilidad de accesos concurrentes (y de atascos estructurales) aumenta a medida que aumenta la cantidad de vías del procesador superscalar.
+    Obstáculos de datos: También se potencian. La arquitectura intenta tomar múltiples instrucciones secuenciales y ejecutarlas al mismo tiempo en distintas unidades funcionales (por ejemplo, dos ALUs). Pero si una instrucción depende del resultado de otra instrucción que se despachó junto con ella, no es posible ejecutarlas en simultáneo, lo que rompe la ilusión del paralelismo y genera un atasco.
+
+Ejemplo demostrativo: Imaginemos un procesador superscalar de dos vías (puede lanzar dos instrucciones al mismo tiempo) procesando las siguientes instrucciones:
+
+    ADD R1, R2, R3
+    SUB R4, R1, R5
+    Para el obstáculo de datos: El hardware intentará enviar la instrucción 1 a la ALU "A" y la instrucción 2 a la ALU "B" en el mismo ciclo de reloj. Sin embargo, la instrucción 2 necesita leer R1, cuyo valor recién está siendo calculado por la instrucción 1. Debido a esta dependencia de datos verdadera (RAW), es imposible ejecutar ambas instrucciones al mismo tiempo. El hardware queda expuesto: debe detener (stall) la vía de la instrucción 2 hasta que la 1 termine, perdiendo la ventaja del diseño superscalar.
+    Para el obstáculo estructural: Supongamos que estas dependencias no existen, pero el hardware entra en un ciclo de reloj donde la "Vía 1" necesita leer un dato de la memoria por una instrucción LOAD, y al mismo tiempo, la "Vía 2" (o la etapa de búsqueda) necesita acceder a la memoria para traer la siguiente instrucción. Si la memoria no tiene puertos de lectura múltiples e independientes (split cache u otras técnicas), ambas vías colisionan intentando acceder al mismo recurso exacto al mismo tiempo. Al no poder resolver la concurrencia, una de las vías se detendrá, exponiendo la falta de recursos estructurales

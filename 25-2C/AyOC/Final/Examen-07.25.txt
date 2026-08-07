@@ -1,0 +1,89 @@
+Preguntas:
+
+1) 8 Cores con Cache L1 y L2 local, y L3 compartida. Línea en estado “M” en L1. Configuración SMP.
+
+    a. ¿Qué implica este estado en términos de ownership y de coherencia?
+    b. Snoop bus. ¿Qué líneas específicas del bus del sistema conecta al Controlador Cache?
+    c. Detecta un Read Miss a una variable contenida de esa línea con estado “M”.
+        i. ¿Qué handshake activa?
+        ii. Estado del bus del core que cursaba el Read Miss como respuesta a dicho handshake.
+        iii. Acción que realiza el Controlador Cache que tiene la línea “M” de acuerdo con el protocolo MESI
+        iv. Estado en el que coloca la línea antes de finalizar
+        v. ¿Cuál de los cores proceden con el acceso al bus posteriormente?
+
+    d. Limitaciones de MESI en este escenario multicore
+    e. ¿Qué aporta MESIF para resolver dichas limitaciones?
+    f. ¿Qué aporta MOESI para resolver dichas limitaciones?
+
+2) Core con ejecución Fuera de Orden.
+
+    a. Bloques que agrega Tomasulo para su implementación:
+        i. Estructura interna de cada uno
+        ii. Cantidad de entradas de cada uno
+        iii. ¿Cómo se implementa en el hardware el link productor consumidor de un dato?
+        iv. ¿Cómo se resuelve el riesgo WAW? Considerar el siguiente código y explique cómo quedan las entradas de cada bloque del modelo de Tomasulo respecto de R1, si la instrucción sub se ejecuta antes de completado el ld. ¿Cómo Tomasulo logró que funcione?
+
+ld   R1, [R7]     ; Cache miss y page fault. Tardará muchos ciclos de clock  
+
+add  R3, R1, R2  
+
+and  R8, #F0  
+
+orr  R11, #1  
+
+sub  R1, #3000 
+
+Respuestas:
+
+1) 8 Cores con Cache L1 y L2 local, y L3 compartida. Línea en estado “M” en L1. Configuración SMP.
+a. ¿Qué implica este estado en términos de ownership y de coherencia?
+
+    Ownership (Propiedad): Implica que este caché es el único propietario exclusivo de la línea. El estado "Modified" es un estado preciso que asegura que la copia de esta caché es la única válida en todo el sistema.
+    Coherencia: Indica que la línea ha sido modificada localmente (dirty) y, por lo tanto, su valor difiere de las copias presentes en los niveles inferiores de la jerarquía de memoria (L2, L3 o DRAM). El controlador es responsable absoluto de la coherencia y está obligado a realizar un write back hacia la memoria del sistema antes de que cualquier otro procesador lea el dato, para evitar que se acceda a información obsoleta.
+
+b. Snoop bus. ¿Qué líneas específicas del bus del sistema conecta al Controlador Cache? El Snoop Bus no es un bus físicamente independiente, sino un conjunto de líneas entrantes al Controlador Caché mediante las cuales "espía" las transacciones que cursan los demás procesadores en el bus del sistema. Las líneas específicas que intercepta para determinar si una transacción le impacta son las de Dirección de Memoria (para comparar la dirección solicitada con sus propios tags) y las líneas de Control que definen el tipo de acceso (lectura o escritura).
+c. Detecta un Read Miss a una variable contenida de esa línea con estado “M”.
+
+    i. ¿Qué handshake activa? El controlador de caché que posee la línea "M" activa la señal RFO (Read For Ownership) para que el otro controlador suspenda su acceso.
+    ii. Estado del bus del core que cursaba el Read Miss: En respuesta al handshake, el core que intentaba hacer la lectura suspende el acceso a la memoria y coloca sus buses en estado de alta impedancia (Hi-Z).
+    iii. Acción que realiza el Controlador Cache que tiene la línea “M”: Realiza el Copy Back (Write Back) de la línea modificada hacia los niveles jerárquicos inferiores.
+    iv. Estado en el que coloca la línea antes de finalizar: Ambos controladores (el dueño original de la línea y el que solicitó la lectura) colocan la línea en estado Shared (S).
+    v. ¿Cuál de los cores proceden con el acceso al bus posteriormente? El core propietario de la línea "M" utiliza el bus para hacer el Copy Back de los datos. En ese mismo momento, el core que cursó el Read Miss detecta este Copy Back por su Snoop Bus y toma directamente la línea desde el bus de datos para almacenarla en su propio caché, sin necesidad de ir a buscarla a la memoria principal.
+
+d. Limitaciones de MESI en este escenario multicore En el protocolo MESI, cuando un caché detecta un Read Miss de otro núcleo solicitando una línea que él tiene en estado "M", se ve forzado a realizar un Write Back hacia el Last Level Cache (LLC) o la Memoria Principal, renunciando así a la propiedad exclusiva de la línea (que se degrada a Shared). Esto genera un gran consumo de ancho de banda en el bus del sistema y demoras por latencia, lo cual impacta severamente la performance a medida que la cantidad de cores aumenta, desaprovechando la velocidad de comunicación directa entre cachés respecto al LLC/DRAM.
+e. ¿Qué aporta MESIF para resolver dichas limitaciones? MESIF optimiza el uso del bus y las respuestas en sistemas multicore añadiendo un nuevo estado llamado Forward (F), el cual es una forma especial del estado Shared (S). Cuando varios cachés tienen la misma línea en estado compartido, el protocolo asegura que solo una de ellas tenga el estado F. Esta caché "F" actúa como la única designada para responder a las solicitudes de Read Miss de otros procesadores, cediendo luego dicho estado F al nuevo solicitante basándose en un criterio LRU.
+f. ¿Qué aporta MOESI para resolver dichas limitaciones? MOESI resuelve el problema de la escritura forzada a memoria introduciendo el estado Owned (O). Con MOESI, cuando otro core realiza un Read Miss sobre una línea "M", se elimina la obligación de realizar un Write Back al LLC o Memoria Principal. La línea en el caché original pasa al estado Owned, conservando la propiedad de la línea (la cual es válida, aunque diferente a la copia obsoleta en la DRAM) y asumiendo la responsabilidad directa de proveerle el dato actualizado a los demás cachés con una latencia mínima. Las demás cachés solicitantes colocan su copia en estado Shared.
+
+2)
+
+a. Bloques que agrega Tomasulo para su implementación:
+El algoritmo de Tomasulo introduce tres elementos principales de hardware a continuación de la Unidad de Decodificación: la Register Alias Table (RAT), las Reservation Stations (RS) y el Common Data Bus (CDB).
+i. Estructura interna de cada uno
+
+    Register Alias Table (RAT): Cada registro de esta tabla se divide en tres campos: Tag, Valor y Válido.
+    Reservation Station (RS): Es un conjunto de registros (File Register) donde cada entrada contiene los siguientes campos: Opcode, Tag, Operando 1 (Valor y bit de Validez V), Operando 2 (Valor y bit de Validez V), y Control.
+    Common Data Bus (CDB): Es un datapath (bus de datos común) que interconecta la salida de todas las Unidades Funcionales con las Reservation Stations y la RAT, transmitiendo simultáneamente un par Valor-Tag a todas ellas.
+
+ii. Cantidad de entradas de cada uno
+
+    RAT: Tiene exactamente la misma cantidad de registros que los registros físicos de la arquitectura del procesador (por ejemplo, 16 registros en un procesador ARMv7).
+    RS: La cantidad de registros o entradas n es muy superior a la cantidad de registros de la arquitectura. Disponer de más entradas que registros arquitecturales es lo que permite implementar el renombramiento y eliminar los riesgos.
+
+iii. ¿Cómo se implementa en el hardware el link productor-consumidor de un dato? Se implementa mediante el renombramiento de registros (Register Renaming) utilizando la RAT y las RS. Cuando una instrucción "productora" se decodifica y ocupa una entrada en la RS, su número de entrada se convierte en un Tag. En la RAT, la entrada correspondiente al registro destino de esa instrucción se actualiza colocando su bit de Válido en 0 y escribiendo ese Tag. Posteriormente, cuando ingresa una instrucción "consumidora" que necesita ese registro, consulta la RAT. Al encontrar el bit Válido en 0, toma el Tag en lugar de un valor y lo guarda en su propia RS, quedando a la espera. El enlace se consuma cuando la instrucción productora finaliza y transmite por el Common Data Bus (CDB) el par Valor-Tag; la RS de la instrucción consumidora detecta la coincidencia del Tag, captura el valor directamente desde el bus y se vuelve "Ready" para ejecutarse.
+iv. Resolución del riesgo WAW y análisis del código
+¿Cómo se resuelve el riesgo WAW (Write After Write)? Tomasulo elimina los riesgos WAW sobrescribiendo (pisando) el Tag en la RAT. La RAT siempre mantiene el Tag de la última instrucción (en el orden lógico del programa) que escribirá en ese registro. Cuando las instrucciones que se ejecutaron fuera de orden finalizan y publican su resultado en el CDB, la RAT compara el Tag recibido con el que tiene almacenado; si no coinciden, la RAT ignora la escritura en el registro de arquitectura, asegurando que solo prevalezca la última escritura válida del programa.
+Análisis del código respecto a R1:
+
+    ld R1, [R7]: Se le asigna una entrada en la RS (supongamos la entrada/Tag 0001). Como R1 es el destino, en la RAT la fila de R1 se marca como Válido=0 y su Tag queda como 0001.
+    add R3, R1, R2: Como consume R1, consulta la RAT. Al ver que R1 no es válido, toma el Tag 0001. Su entrada en la RS queda esperando el Operando 1 con el Tag 0001.
+    sub R1, #3000: Esta instrucción también escribe en R1. Se le asigna otra entrada en la RS (supongamos la entrada/Tag 0100). Al ser R1 el destino, pisa el Tag de la RAT. Ahora la RAT para R1 tiene Válido=0 y su Tag es 0100.
+
+Si la instrucción sub se ejecuta antes de completado el ld:
+
+    Cuando el sub termina, envía su resultado y su Tag (0100) a través del CDB.
+    La RAT compara el tag recibido (0100) con el que tiene para R1 (0100). Como hay coincidencia, la RAT toma el valor resultante, marca el registro R1 como Válido=1 y aplica el resultado de la resta.
+    Muchos ciclos después, la instrucción ld termina y vuelca su resultado en el CDB junto a su Tag (0001).
+    La RS que contiene el add ve el Tag 0001, toma el valor de memoria y por fin despacha la instrucción add a ejecución.
+    Sin embargo, la RAT verifica su entrada para R1 y ve que su contenido (Tag 0100 o Válido=1) no coincide con el Tag del ld (0001). Por lo tanto, la RAT ignora completamente este resultado y no lo escribe en el registro R1.
+
+¿Cómo Tomasulo logró que funcione? Lo logró desvinculando los operandos arquitecturales del flujo real de los datos a través del Register Renaming. Al guardar el Tag en las RS de las instrucciones consumidoras (manteniendo las dependencias de datos RAW intactas sin importar cuánto se demoren) y al mismo tiempo permitiendo que la RAT siempre apunte a la última versión lógica del registro (descartando escrituras antiguas tardías), el hardware elimina por completo el riesgo WAW permitiendo la ejecución desordenada sin alterar el comportamiento lógico del algoritmo.

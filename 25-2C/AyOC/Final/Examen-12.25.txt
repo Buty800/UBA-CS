@@ -1,0 +1,188 @@
+Preguntas:
+
+A1. Indicar si la siguiente afirmación es verdadera o falsa: "En forwarding los datos almacenados en el RF son enviados directamente a la UF o ALU para acelerar las operaciones en el mismo ciclo de reloj." Justifique su respuesta explicando detalladamente el funcionamiento de la técnica de Forwarding en un pipeline.
+
+A2. De los riesgos RAW, WAW y WAR, indicar:
+
+    a. ¿Cuáles no se pueden dar en un pipeline in-orden?
+
+    b. ¿Cuáles se pueden dar en un procesador superscalar?
+
+    c. ¿Cuáles se dan en un procesador fuera de orden?
+
+A3. ¿Cómo se resuelve el riesgo WAW en un procesador fuera de orden?. Considerar el siguiente código.
+Fragmento de código
+
+ldr  R1, [R4] ;Cache miss. Asumir latency de 25 ciclos de clock.
+add  R8, R10, R12
+ldr  R6, [R9]
+ldr  R11, [R7+0x8]
+sub  R1, R9, R10
+
+Explique cómo quedan las entradas de cada bloque del modelo de Tomasulo respecto de R1, si la instrucción sub se ejecuta antes de completado el ld. ¿Como Tomasulo logró que funcione?
+
+A4. Explicar el concepto de Excepciones imprecisas. Indique un ejemplo de código en el que queden expuestos los efectos. Explicar como se resuelve.
+
+A5. Indicar cuál de las siguientes afirmaciones es la correcta, en referencia al Tag de un registro en la RAT, cuando para ese registro además V=0:
+
+    a. Corresponde a un valor arbitrario establecido en la Decodificación de la instrucción.
+
+    b. Es establecido en base a las dependencias de la instrucción.
+
+    c. Es el índice dentro de la RS de la instrucción que utiliza al registro en cuestión como operando origen.
+
+    d. Ninguna de las anteriores.
+
+Justificar su respuesta
+
+B1. Las memorias DRAM requieren un circuito de refresco. Explicar las razones de esta afirmación y explicar cómo funciona un amplificador de detección.
+
+B2. ¿Por qué no es posible hacer que todas las memorias cache de un procesador sean full asociativas?. Justificar.
+
+B3. Una estrategia utilizada en la estructura de caches se denomina "Split Cache". Explicar qué significa y qué ventajas tiene sobre una cache unificada. Qué relación tienen estas ideas sobre una organización Harvard vs Von Newman.
+
+B4. La señal Read For Ownership es generada en un sistema cache SMP. Explicar quién la genera, en qué contexto, y dar un ejemplo de un caso práctico donde se utilice esta señal.
+
+B5. En una cache que usa protocolo Mesi se hace una escritura. Indicar el estado en el que queda la línea, partiendo desde cada uno de los estados de MESI. Justificar cada transición.
+
+Respuestas: 
+
+A1.
+
+Falsa.
+Justificación y funcionamiento detallado de la técnica de Forwarding:
+La afirmación es incorrecta porque el Forwarding no utiliza los datos almacenados en el banco de registros (RF) para acelerar la operación. Por el contrario, en esta técnica se extrae el resultado directamente de la salida de la unidad de Ejecución (ya sea la ALU, la unidad de Floating Point, o la que corresponda según la instrucción) en el instante en que está disponible.
+El funcionamiento en un pipeline se da de la siguiente manera:
+
+    Una vez extraído de la unidad de Ejecución, el dato se envía a la entrada de la etapa que lo requiere en el mismo ciclo de reloj en que dicho dato se escribe en el operando destino.
+    Esto permite disponer del dato de forma inmediata para la siguiente instrucción, ahorrando el tiempo de espera que implicaría aguardar a que el resultado se retire (es decir, que se escriba de manera definitiva en el operando destino o RF).
+    La técnica se aplica únicamente a aquellas etapas posteriores que quedarían detenidas (en estado stall) a causa de la dependencia de datos. A las etapas que no sufrirían un stall, simplemente se les envía el resultado cuando este se aplica formalmente en el operando destino.
+    Normalmente, el forwarding aplica a operaciones de ALU consecutivas (conocidas como operaciones back-to-back). Sin embargo, existen casos en los que el forwarding no es factible, como cuando se requiere un dato desde la memoria (por ejemplo, con una instrucción ldr); en esos escenarios, no es posible adelantar el dato hasta que se complete el ciclo de reloj correspondiente a la llegada del resultado
+    
+A2.
+
+a. ¿Cuáles no se pueden dar en un pipeline in-orden? Los riesgos que no se pueden dar en un pipeline con ejecución en orden son WAR (Write After Read) y WAW (Write After Write). Estos nuevos riesgos aparecen únicamente cuando se intenta despachar a ejecución una instrucción antes que sus predecesoras, situación que no ocurre en los procesadores que ejecutan estrictamente en orden.
+b. ¿Cuáles se pueden dar en un procesador superscalar? En un procesador superescalar tradicional (que ejecuta en orden) se da típicamente el riesgo RAW (Read After Write), el cual de hecho se agudiza en este tipo de arquitectura debido a que se emiten múltiples instrucciones a diferentes pipelines en el mismo ciclo de reloj. Cabe aclarar que, si el diseño superescalar incorpora ejecución fuera de orden, entonces podrá sufrir los tres riesgos mencionados.
+c. ¿Cuáles se dan en un procesador fuera de orden? En un procesador con ejecución fuera de orden se dan los tres riesgos: RAW, WAR y WAW. El riesgo RAW continúa existiendo debido a que es una dependencia verdadera de datos que debe respetarse. Por otro lado, los riesgos WAR y WAW surgen como consecuencia directa de permitir que las instrucciones se despachen y escriban sus resultados sin respetar el orden secuencial previsto por el programador
+
+
+A3.
+
+En un procesador con ejecución fuera de orden, el riesgo WAW (Write After Write) se resuelve utilizando la técnica de Register Renaming (Renombre de Registros) propuesta por el Algoritmo de Tomasulo. Este método permite que las instrucciones se ejecuten y finalicen sin importar el orden secuencial, garantizando que el estado final de los registros refleje correctamente la última escritura prevista por el programa original.
+Para lograrlo, el Algoritmo de Tomasulo emplea nuevas estructuras de hardware: la Register Alias Table (RAT), las Reservation Stations (RS) y el Common Data Bus (CDB).
+A continuación, se detalla cómo quedan las entradas respecto al registro R1 y cómo funciona la solución con el fragmento de código dado:
+
+- Estado de las entradas al despachar las instrucciones:
+Al decodificar la instrucción ldr R1, [R4], esta se envía a una Reservation Station (RS) asignada a los accesos a memoria. En ese momento, en la entrada correspondiente a R1 dentro de la RAT, el campo Válido se pone en 0 y el campo Tag se actualiza con el identificador (o número de entrada) de la RS que contiene la instrucción ldr.
+
+Las instrucciones siguientes (add, la segunda ldr y la tercera ldr) operan sobre otros registros destino, por lo que actualizan sus respectivas entradas en la RAT sin afectar a R1. Al decodificar la instrucción sub R1, R9, R10, esta se ubica en una RS de la ALU. Como su destino también es R1, la RAT "pisa" (sobrescribe) el Tag anterior de R1 (el de la instrucción ldr) con el nuevo Tag correspondiente a la RS de la instrucción sub.
+En este punto, la RAT siempre mantiene el último Tag emitido en orden de programa. En las RS, los Tags no se sobrescriben, conservando las dependencias necesarias de manera independiente.
+
+- Ejecución fuera de orden (¿Cómo logró Tomasulo que funcione si sub termina antes que ldr?): Dado que la instrucción ldr sufre un cache miss y demora 25 ciclos, la instrucción sub tendrá sus operandos listos mucho antes, se ejecutará y finalizará primero. El modelo de Tomasulo gestiona esta situación de la siguiente manera:
+Finalización de la instrucción sub: Cuando la sub termina, transmite por el Common Data Bus (CDB) su resultado junto con su Tag. La RAT escucha el CDB y compara este Tag con el que tiene almacenado para R1. Como el Tag en la RAT coincide con el emitido por la sub, la RAT actualiza su campo Valor con el resultado de la resta y pone el campo Válido en 1.
+Finalización de la instrucción ldr (retrasada 25 ciclos): Cuando finalmente la memoria entrega el dato y la ldr termina, también transmite su resultado y su propio Tag por el CDB.
+Prevención del riesgo WAW: La RAT vuelve a comparar el Tag entrante (el de ldr) con el que tiene almacenado para R1. Como la instrucción sub ya había pisado ese Tag con el suyo, la RAT detecta que los Tags no coinciden. Al no haber coincidencia, la RAT ignora la escritura de la instrucción ldr sobre el registro arquitectural.
+De este modo, Tomasulo asegura que sólo se aplique la última escritura válida (la de sub), eliminando por completo el riesgo WAW provocado por la ejecución anticipada de la resta y el retraso en la lectura de memoria.
+
+A4.
+
+Concepto de Excepciones Imprecisas En los procesadores modernos con ejecución fuera de orden (Out of Order), las excepciones imprecisas ocurren cuando una instrucción genera una excepción (o interrupción) pero el estado del procesador al momento de atenderla no refleja de manera congruente el orden secuencial del programa. Debido a la naturaleza fuera de orden, es muy probable que cuando la excepción ocurre, haya instrucciones posteriores que ya se ejecutaron y modificaron el estado de la máquina, mientras que instrucciones previas aún estén demoradas sin completarse. Esto resulta devastador para la lógica del programa, ya que impide recuperar el estado correcto de ejecución luego de atender el manejador de la excepción.
+Ejemplo de código y sus efectos Consideremos el siguiente bloque de código ejecutándose en un core ARMv7 CORTEX-A
+:
+1 ldr     R1, [R11]     // Cache miss. Demora 15 ciclos de clock
+2 sdiv    R0, R2, R1    // Depende de R1 y agrega 5 ciclos
+3 and     R9, R9, #0xAA55
+4 vmov.i8 D0[6], R9     // CP11 y CP10 apagados. Genera Undefined Exception
+5 add     R6, R0, R8
+6 orr     R6, R6, #0xA0
+Efectos expuestos en este escenario:
+Las instrucciones 1 y 2 son despachadas, pero quedan demoradas largamente en la unidad de ejecución debido al cache miss en la instrucción 1.
+Como es un procesador superescalar con ejecución fuera de orden, las instrucciones 3, 5 y 6 (que tienen sus operandos listos) se adelantan y se ejecutan, alterando prematuramente los registros arquitecturales (ej. R6) y los flags de estado.
+Cuando la instrucción 4 intenta ejecutarse, encuentra los coprocesadores apagados y dispara una excepción Undefined.
+Al vectorizarse la excepción, el procesador limpia (flushea) el pipeline perdiendo el procesamiento parcial de las instrucciones 1 y 2 que aún no habían terminado.
+Si se ejecuta el manejador de la excepción (Handler) y se retorna el control al programa en la instrucción 4, el estado del procesador es un caos absoluto: las instrucciones 1 y 2 nunca se terminaron, pero las instrucciones 5 y 6 ya aplicaron sus efectos.
+¿Cómo se resuelve? Para evitar este colapso sin perder la ventaja de la velocidad, los procesadores resuelven las excepciones imprecisas mediante la Especulación por Hardware introduciendo una estructura llamada ReOrder Buffer (ROB).
+El funcionamiento que resuelve el problema es el siguiente:
+Ejecución fuera de orden, pero retiro en orden: Las instrucciones se siguen ejecutando tan pronto tienen sus operandos listos, pero sus resultados no se escriben de manera inmediata en los registros arquitecturales de la CPU.
+En su lugar, los resultados quedan temporalmente almacenados en las entradas del ROB de manera especulativa.
+El ROB se encarga de realizar la fase final (llamada Commit o Retiro) forzando a que los resultados se apliquen a los registros arquitecturales estrictamente en el orden en que las instrucciones estaban en el código original.
+Si surge una excepción (como en la instrucción 4 del ejemplo) o una predicción de salto fallida, el procesador no procesa la excepción de inmediato. En su lugar, espera a que llegue el turno del Commit de esa instrucción fallida. Llegado el momento, el procesador sabe que todas las instrucciones anteriores (1, 2 y 3) finalizaron y aplicaron sus cambios en orden. Las instrucciones posteriores (5 y 6) que se habían ejecutado adelantadas están guardadas especulativamente en el ROB; por lo que el procesador simplemente vacia (flushea) las entradas del ROB, anulando los efectos adelantados.
+De este modo se logra preservar intacto el comportamiento secuencial original esperado por el programador.
+
+A5.
+
+La afirmación correcta es la d. Ninguna de las anteriores.
+Justificación:
+De acuerdo con el funcionamiento del Algoritmo de Tomasulo, cuando en la Register Alias Table (RAT) el campo Válido (V) de un registro es igual a 0, significa que dicho registro es el operando destino de una instrucción que aún está pendiente de ejecución.
+En ese momento, el valor que se establece en el Tag de la RAT corresponde al número (o índice) del registro de la Reservation Station (RS) en donde fue almacenada esa instrucción que va a modificar el registro.
+Por lo tanto, se descartan las otras opciones por las siguientes razones:
+La opción a es incorrecta porque el Tag no es un valor arbitrario, sino que es el índice exacto de la entrada de la RS que contiene a la instrucción pendiente.
+La opción b es incorrecta porque el Tag se asigna estrictamente en función de la ubicación (índice de la RS) donde se guarda la instrucción decodificada que escribirá el resultado.
+La opción c es incorrecta (y es el distractor principal) debido a que indica que es el índice de la instrucción que lo usa como operando origen. Por el contrario, el Tag en la RAT referencia siempre a la RS de la instrucción que lo utiliza como operando destino (es decir, el productor del dato, no el consumidor)
+
+B1.
+
+Razones por las que las memorias DRAM requieren un circuito de refresco:
+Las memorias dinámicas (DRAM) almacenan cada bit de información en forma de carga eléctrica dentro de un capacitor, utilizando un único transistor como medio de acceso. Debido a que estos componentes físicos no son ideales, la carga almacenada en el capacitor se pierde con el tiempo por dos motivos fundamentales:
+Fugas por impedancia: Los capacitores inevitablemente encuentran un camino de impedancia (alta, pero no infinita) a través del cual se descargan. Estas corrientes de fuga obligan a que la memoria deba ser refrescada periódicamente para regenerar la carga y evitar que la información se pierda.
+Lectura destructiva: Al realizar una lectura, el capacitor cede su carga a la línea de bits (bitline), perdiéndose el estado original. Esto hace que el proceso de lectura por sí mismo requiera que la información sea inmediatamente restaurada.
+Funcionamiento de un Amplificador de Detección (Sense Amplifier):
+Dado que la cantidad de electrones almacenados en el minúsculo capacitor no es suficiente para producir una señal lógica estándar, la lectura requiere sensar un cambio eléctrico minúsculo en un intervalo de tiempo muy corto. El amplificador de detección, cuyo núcleo es un circuito biestable compuesto por cuatro transistores interconectados, se encarga de este proceso dividiéndolo en cuatro fases:
+
+Fase de Precarga (Precharge): Antes de la lectura, el amplificador precarga las líneas de bit (bitlines) a un valor de tensión de referencia intermedio, típicamente la mitad del voltaje de alimentación (V cc /2 o V ref).
+
+Fase de Acceso (Access): Se activa la línea de palabra (wordline) correspondiente, lo que satura al transistor de la celda. El capacitor se conecta a la bitline y descarga su contenido, produciendo un desbalance microscópico (un δ de tensión) en el nivel de precarga, ya sea aumentándolo o disminuyéndolo según si almacenaba un "1" o un "0".
+
+Fase de Detección (Sense): Ese minúsculo diferencial de tensión polariza al circuito biestable del amplificador. Al activarse las señales de control del amplificador (SAN para los transistores N-Fet y SAP para los P-Fet), éste empuja violentamente las bitlines hacia los extremos lógicos opuestos (0V y V cc ), dependiendo del sentido del desbalance inicial. En este punto el dato ya puede ser leído válidamente.
+
+Fase de Restauración (Restore): Debido a que la wordline de la celda permanece activa, el nivel de tensión extremo (0 o 1) generado por el amplificador viaja de regreso por la bitline, recargando el capacitor a través del transistor de acceso. Así, el amplificador restituye el valor de carga que la celda había perdido al ser leída.
+
+B2.
+
+No es viable diseñar todas las memorias caché de un procesador con organización fully associative (completamente asociativa) debido a que aumentaría drásticamente la complejidad del hardware y el consumo de energía del sistema.
+Justificación: En una memoria fully associative, un bloque o línea proveniente de la memoria principal puede almacenarse en cualquier ubicación libre del caché. Aunque esto proporciona ventajas como la máxima flexibilidad de ubicación y el mayor Hit Rate posible, presenta graves problemas de implementación a gran escala:
+Tiempo de búsqueda no determinístico: Para leer o escribir un dato, el controlador requeriría iterar secuencialmente a través de todas las líneas de la caché hasta encontrar el tag correspondiente o una línea libre.
+Hardware de búsqueda paralelo prohibitivo: Para evitar el tiempo de búsqueda secuencial y lograr que las lecturas sean tan rápidas como en los otros métodos (mapeo directo o asociativo por conjuntos), se necesita emplear una inmensa cantidad de hardware de búsqueda paralelo. Esto implica que cada línea de caché requeriría sus propios comparadores lógicos operando al mismo tiempo.
+Aumento de complejidad y consumo energético: Integrar toda esta circuitería de comparación simultánea para todas las entradas de un caché moderno volvería el diseño excesivamente complejo y dispararía el consumo de energía a niveles inaceptables.
+Por estas razones, la organización completamente asociativa solo es práctica en estructuras de almacenamiento muy pequeñas, obligando a los diseñadores a utilizar configuraciones como la asociativa por conjuntos (set associative) como una solución de compromiso para el resto de las memorias caché.
+
+B3.
+
+La estrategia de "Split Cache" consiste en utilizar memorias caché físicamente separadas para almacenar el código (ICache) y para los datos (DCache). Esta división se aplica típicamente en el primer nivel de la jerarquía de caché (L1) basándose en el principio de "divide y vencerás".
+Ventajas sobre una caché unificada:
+Eliminación de obstáculos estructurales (cuellos de botella): En un diseño de caché unificada, si la CPU necesita buscar una instrucción en la memoria y, en el mismo ciclo, resolver un acceso a un dato (una instrucción Load o Store), se produce un conflicto por el acceso al recurso. El Split Cache soluciona esto permitiendo accesos concurrentes, lo que mejora drásticamente la performance del sistema.
+Flexibilidad en el diseño: Permite configurar de modo diferente ambas cachés (modificando el tamaño de línea, la cantidad de vías de asociatividad, etc.) para optimizarlas según la naturaleza de sus accesos.
+Cabe destacar que las cachés de instrucciones poseen Miss rates (tasas de fallos) inherentemente mucho mejores que las de datos; por lo tanto, la verdadera ventaja y justificación técnica del Split Cache radica en la mejora de la performance por paralelismo y no en una mejora de la tasa de aciertos.
+Relación con las organizaciones Harvard y Von Neumann:
+La implementación de un Split Cache hace que en el nivel de la memoria L1 el procesador adquiera una organización de tipo Harvard, ya que cuenta con estructuras y buses dedicados y separados para las instrucciones y para los datos.
+Sin embargo, la visión global de la memoria sigue respondiendo al modelo de Von Neumann, debido a que el programador y el software siguen percibiendo un único espacio de direccionamiento lógico donde conviven tanto el código como los datos.
+Esta convivencia de ambos mundos se logra porque la división en el caché se realiza exclusivamente por hardware y de forma totalmente transparente al programador (gestionada por el controlador de caché), de manera que el software no tiene ningún control directo sobre dicha separación.
+
+B4.
+
+La señal Read For Ownership (RFO) es generada por el Controlador de Memoria Caché de un procesador dentro de un sistema multiprocesador (SMP).
+Contexto en el que se genera: Esta operación se da en el marco de los protocolos de coherencia (como MESI o MOESI) para asegurar el acceso a un dato válido cuando la información no está coherente a lo largo de toda la jerarquía de memoria. Puntualmente, es enviada por el caché local cuando necesita escribir o modificar una línea que se encuentra en estado Shared (Compartido) o Invalid (Inválido).
+Desde la perspectiva del controlador, la transacción consiste en una lectura de la línea cacheada donde se toma el control del bus del sistema para escribir el contenido en el nivel jerárquico inferior (Write Back). Al ejecutarse, actúa como una operación exclusiva que fuerza al resto de los controladores que posean una copia de esa misma línea a invalidarla inmediatamente.
+Ejemplo de un caso práctico: Un escenario típico donde se utiliza esta señal ocurre cuando un procesador (Core A) posee una línea de caché en estado Modified (es decir, tiene la única copia con el dato actualizado) y otro procesador (Core B) intenta acceder a esa dirección, sufriendo un Read Miss o un Write Miss.
+El Core B coloca su petición de Miss en el bus de sistema.
+El Controlador de Caché del Core A detecta esta solicitud a través de su Snoop Bus y activa la señal RFO.
+Al recibir el RFO, el Core B suspende su intento de acceso a memoria y pone sus buses en estado de alta impedancia (Hi-Z).
+En ese momento, el Core A tiene el camino libre para ejecutar el Copy Back, volcando el dato actualizado al bus.
+El Core B, que seguía espiando el Snoop Bus, detecta el dato actualizado, lo lee, lo almacena en su propio caché, y finalmente ambos controladores ajustan el estado de sus líneas para garantizar la coherencia (por ejemplo, a Shared si fue un Read Miss, o el Core B asume el estado Modified e invalida al Core A si fue un Write Miss).
+Adicionalmente, bajo el protocolo MOESI, cuando un core desea escribir sobre una línea que él mismo tiene en estado Owned o Shared, el controlador activa RFO, efectúa el Write Back (pasando al estado Modified) y obliga al resto de los cachés a invalidar sus respectivas copias compartidas.
+
+B5.
+
+En un sistema de caché que utiliza el protocolo MESI, cuando el procesador local realiza una operación de escritura, la línea siempre terminará en el estado Modified (M). Sin embargo, el mecanismo y la justificación difieren según el estado de partida de la línea:
+
+Partiendo desde Invalid (I) → Pasa a Modified (M)
+Justificación: Al encontrarse la línea inválida (o no estar presente), el intento de escritura genera un Write Miss. El controlador de caché propaga este Write Miss por el bus del sistema para que los demás controladores invaliden la línea si la tienen. Simultáneamente, el controlador local trae la línea completa desde el nivel inferior de la jerarquía de memoria (utilizando la operación Read For Ownership). Una vez que la línea se escribe en la caché, asume el estado Modified porque ahora posee la única copia actualizada y válida en todo el sistema.
+
+Partiendo desde Shared (S) → Pasa a Modified (M)
+Justificación: La línea está presente y es válida, pero el sistema asume que existen o pueden existir copias idénticas en los cachés de otros núcleos. Para escribir en una línea Shared, es un requisito indispensable que todas las demás cachés que la tienen la invaliden previamente. El controlador propaga una invalidación (o Write Miss) por el bus; una vez logrado el acceso exclusivo, realiza la escritura localmente y transita al estado Modified.
+
+Partiendo desde Exclusive (E) → Pasa a Modified (M)
+Justificación: La caché ya tiene garantizada la exclusividad de la línea y sabe que ninguna otra caché la posee, coincidiendo su valor con el de la memoria principal. Al realizar la escritura, el procesador la resuelve directamente de manera local y sin generar ninguna notificación o invalidación en el bus del sistema. Como el dato escrito ahora difiere de la copia en la memoria principal, el estado de la línea debe cambiar de Exclusive a Modified para indicar que es la única copia válida.
+
+Partiendo desde Modified (M) → Se mantiene en Modified (M)
+Justificación: La línea ya se encontraba modificada (estado dirty) y la caché local ostenta su propiedad absoluta. El procesador puede ejecutar nuevas escrituras (o lecturas) sobre esta misma línea en cualquier momento sin necesidad de utilizar el bus del sistema y sin alterar el estado de la línea, manteniéndola en Modified.
